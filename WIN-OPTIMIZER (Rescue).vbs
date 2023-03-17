@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.4.02 (Beta1) " 
+revision = "v.3.4.02 (Rescue-Edition) " 
 version = title & revision 
  
 
@@ -2054,7 +2054,26 @@ Err.Clear
 On Error Resume Next 
 WshShell.Run "WSReset.exe -i", 1, True 
 Err.Clear 
-End Sub  
+ 
+Rem >> Rescue-Datenträgerüberprüfung << 
+Err.Clear 
+On Error Resume Next  
+Dim ws,MyCommand,Execution
+Set ws = createobject("wscript.shell")
+MyCommand1 = "Dism /Online /Cleanup-Image /RestoreHealth"
+Execution = ws.run(MyCommand1,1,True)
+Err.Clear 
+On Error Resume Next 
+MyCommand2 = "SFC /SCANNOW"
+Execution = ws.run(MyCommand2,1,True)
+Err.Clear 
+  
+Rem >> Index-Neu-Erstellen << 
+Err.Clear 
+On Error Resume Next 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\SetupCompletedSuccessfully", 0, "REG_DWORD" 
+Err.Clear 
+End Sub 
 
 Sub DirectX ()
 Err.Clear 
@@ -2146,6 +2165,10 @@ Err.Clear
 On Error Resume Next 
 WshShell.Run "mschedexe.exe start", 1, False 
 Err.Clear 
+Rem >> Defender Offline-Scan << 
+On Error Resume Next 
+objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Start-MpWDOScan -v"), 1, True 
+Err.Clear 
 On Error Resume Next 
 WshShell.Run "taskkill /f /fi “status eq not responding”", 1, True 
 Err.Clear 
@@ -2200,6 +2223,6 @@ rem 	* -written by 				*
 rem 	* René Bengsch 				* 
 rem 	* info/contact @ 			* 
 rem 	* facebook.com/groups/WindowsOptimizer 	* 
-rem 	* e-m@il: hammanit@web.de	 	* 
+rem 	* e-m@il: hammanit@web.de 		* 
 rem 	***************************************** 
  

@@ -23,9 +23,9 @@ https://www.facebook.com/groups/WindowsOptimizer
 Aktuelle Version: 
 WINDOWS-OPTIMIZER v.3.5.01 (Beta1)
 Hier der Direktlink (RAR): 
-https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
-Hier der Direktlink (OHNE RAR): 
-https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.vbs 
+https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
+Hier der Direktlink (OHNE RAR)
+https://www.dropbox.com/s/oocfdv99pgjl4bb/WIN-OPTIMIZER.vbs?dl=1
 New Updates coming soon..
 
 
@@ -127,20 +127,17 @@ Alle wichtigen Änderungen zusammengefasst:
 
 Changelog: 
 v.3.5.01 (Beta1) (Aktuelles Release!) 
-* Ab sofort gibt es ein offizielles GitHub für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
-* Ab sofort werden alle Downloadlinks über das neue GitHub bereitgestellt: 
-* Hier der Direktlink (RAR): 
-	https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
-* Hier der Direktlink (OHNE RAR): 
-	https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.vbs 
+* Ab sofort gibt es ein offizielles GitHub-Projekt für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
+* Ab sofort werden alle Downloadlinks auch über das neue GitHub-Projekt bereitgestellt: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 * Die Performance der Windows-Oberfläche wird verbessert. 
+* Die I/O-Reaktionszeiten von verschiedenen Hardware-Komponenten wie Grafik-Controller, Sound-Controller, Netzwerk-Controller, USB-Controller werden treiberseitig verbessert. 
 * Die Performance des Microsoft-Store wird verbessert. 
-* Die Performance von Inplace-Updates und Reparaturen wird verbessert. 
+* Die Performance von Inplace-Updates und -Reparaturen wird verbessert. 
 * Die Performance des Microsoft-Update-Assistenten wird verbessert. 
-* Die Performance des Media-Creation-Tools und des Erstellen eines USB-Boot-Sticks wird verbessert. 
+* Die Performance des Media-Creation-Tools und des Erstellen eines USB-Boot-Sticks werden verbessert. 
 * Die Performance des DirectX-Installers wird verbessert. 
 * Die Performance und Genauigkeit des SPEED-TEST (WinSat) wird verbessert. 
-* Wenn mehrere Monitore gleichzeitig werwendet werden wird das Verhalten von Fenstern wenn einer oder mehrere Monitore deaktiviert oder ausgesteckt und/oder wieder aktiviert oder wieder eingesteckt werden konfiguriert. 
+* Wenn mehrere Monitore gleichzeitig werwendet werden wird das Verhalten von Fenstern wenn ein oder mehrere Monitore deaktiviert oder ausgesteckt und/oder wieder aktiviert oder wieder eingesteckt werden konfiguriert. 
 * Die neue Bing-SideBar in MS-EDGE wird deaktiviert. 
 * Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
 * Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 

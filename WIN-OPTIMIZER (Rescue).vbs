@@ -375,7 +375,7 @@ Sub winOpt ()
 Err.Clear 
 On Error Resume Next 
 Rem >> Registry-Backup << 
-WshShell.Run "cmd.exe /c Systeminfo & echo off & echo "& version &" & echo optimizing - please wait.... & REGEDIT /E /Y C:\REGISTRY-BACKUP.REG", 3, True 
+WshShell.Run "cmd.exe /c Systeminfo & echo off & echo "& version &" & echo optimizing - please wait....  & echo creating registry-backup: C:\REGISTRY-BACKUP.REG & REGEDIT /E /Y C:\REGISTRY-BACKUP.REG", 3, True 
 Err.Clear 
 On Error Resume Next 
 Rem >> Alle Explorer.exe beenden << 
@@ -2063,6 +2063,9 @@ Process.terminate(0)
 next 
 Err.Clear 
 On Error Resume Next 
+WshShell.Run "net start bits", 1, True
+Err.Clear 
+On Error Resume Next 
 WshShell.Run "WSReset.exe -i", 1, True 
 Err.Clear 
  
@@ -2105,9 +2108,6 @@ Sub DXOpt ()
 Err.Clear 
 On Error Resume Next   
 Downloads = WSHShell.Regread ("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\{374DE290-123F-4565-9164-39C4925E467B}") 
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "net start bits", 1, True
 Err.Clear 
 On Error Resume Next 
 objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Start-BitsTransfer -Source https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe -Destination " & Downloads & " -v"), 1, True  

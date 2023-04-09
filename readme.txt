@@ -61,8 +61,8 @@ Das ist Richtig und korrekt. Windows funktioniert im Desktop-Betrieb perfekt auc
 Antwort: 
 in den meisten Fällen JA - Bei Schadsoftware sieht es da leider anders aus. Genau hierfür gibt es eine Spezielle „RESCUE-VERSION“ des WINDOWS-OPTIMIZER, die zusätzlich alle Systemdateien prüft und fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurücksetzt. Im Anschluss wird noch eine vollständige Offline-Virenprüfung gestartet. 
 
-Hier geht es zur RESCUE-EDITION:
-https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER%20(Rescue).vbs 
+Hier geht es zur RESCUE-EDITION: 
+https://www.dropbox.com/s/u1bkxd07dytbe6u/WIN-OPTIMIZER%20%28Rescue%29.vbs?dl=1
 
 8. Stimmt es, daß die Entwickler des WINDOWS-OPTIMIZER in Kontakt mit Microsoft stehen und so z.B. auf aktuelle Probleme wie den aktuellen RDP-Bug reagieren können UND dazu sogar kurzfristig gegebenenfalls ein Fix kommt?
 Antwort:
@@ -104,6 +104,8 @@ Der SPEED-TEST ist ein weiteres Script aus unserem Projekt, daß die Windowseigen
 17. Kann man auch alle Programme aus dem Projekt zusammen herunterladen?
 Antwort: 
 Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR): 
+https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1 
+oder
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 
 18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen? 
@@ -129,8 +131,8 @@ Changelog:
 v.3.5.01 (Beta1) (Aktuelles Release!) 
 * Ab sofort gibt es ein offizielles GitHub-Projekt für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
 * Ab sofort werden alle Downloadlinks auch über das neue GitHub-Projekt bereitgestellt: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
+* Die I/O-Reaktionszeiten von verschiedenen Hardware-Komponenten wie Grafik-Controller, Sound-Controller, Netzwerk-Controller, Festplatten-Controller, USB-Controller werden treiberseitig verbessert. 
 * Die Performance der Windows-Oberfläche wird verbessert. 
-* Die I/O-Reaktionszeiten von verschiedenen Hardware-Komponenten wie Grafik-Controller, Sound-Controller, Netzwerk-Controller, USB-Controller werden treiberseitig verbessert. 
 * Die Performance des Microsoft-Store wird verbessert. 
 * Die Performance von Inplace-Updates und -Reparaturen wird verbessert. 
 * Die Performance des Microsoft-Update-Assistenten wird verbessert. 

@@ -139,7 +139,7 @@ v.3.5.01 (Beta1) (Aktuelles Release!)
 * Die Performance des Media-Creation-Tools und des Erstellen eines USB-Boot-Sticks werden verbessert. 
 * Die Performance des DirectX-Installers wird verbessert. 
 * Die Performance und Genauigkeit des SPEED-TEST (WinSat) wird verbessert. 
-* Wenn mehrere Monitore gleichzeitig werwendet werden wird das Verhalten von Fenstern wenn ein oder mehrere Monitore deaktiviert oder ausgesteckt und/oder wieder aktiviert oder wieder eingesteckt werden konfiguriert. 
+* Wenn mehrere Monitore gleichzeitig verwendet werden wird das Verhalten von Fenstern wenn ein oder mehrere Monitore deaktiviert oder ausgesteckt und/oder wieder aktiviert oder wieder eingesteckt werden konfiguriert. 
 * Die neue Bing-SideBar in MS-EDGE wird deaktiviert. 
 * Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
 * Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 

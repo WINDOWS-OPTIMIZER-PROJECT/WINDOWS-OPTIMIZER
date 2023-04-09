@@ -130,7 +130,7 @@ Alle wichtigen Änderungen zusammengefasst:
 Changelog: 
 v.3.5.01 (Beta1) (Aktuelles Release!) 
 * Ab sofort gibt es ein offizielles GitHub-Projekt für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
-* Ab sofort werden alle Downloadlinks auch über das neue GitHub-Projekt bereitgestellt: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
+* Ab sofort werden alle Downloadlinks auch über das neue GitHub-Projekt bereitgestellt. 
 * Die I/O-Reaktionszeiten von verschiedenen Hardware-Komponenten wie Grafik-Controller, Sound-Controller, Netzwerk-Controller, Festplatten-Controller, USB-Controller werden treiberseitig verbessert. 
 * Die Performance der Windows-Oberfläche wird verbessert. 
 * Die Performance des Microsoft-Store wird verbessert. 

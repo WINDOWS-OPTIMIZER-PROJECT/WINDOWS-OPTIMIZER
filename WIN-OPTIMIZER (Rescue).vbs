@@ -847,6 +847,8 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\opera.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\opera.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaPortable.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaPortable.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\seamonkey.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\seamonkey.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Setup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 

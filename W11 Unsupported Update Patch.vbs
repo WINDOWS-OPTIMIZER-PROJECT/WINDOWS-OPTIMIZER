@@ -104,12 +104,13 @@ Set objShell = Nothing
 WScript.Quit
  
  
-rem 	***************************************** 
-rem 	* !c3 Unsupported Update Patch 	    	* 
-rem 	* -written by 			    	* 
-rem 	* René Bengsch 			    	* 
-rem 	* info/contact @ 		    	* 
-rem 	* facebook.com/groups/WindowsOptimizer 	* 
-rem 	* e-m@il: senseless-creature@web.de 	* 
-rem 	***************************************** 
+rem 	******************************************************************* 
+rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* -written by 							  * 
+rem 	* René Bengsch							  * 
+rem 	* info/contact @ 						  * 
+rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * 
+rem 	* facebook.com/groups/WindowsOptimizer				  * 
+rem 	* e-m@il: hammanit@web.de 	 				  * 
+rem 	******************************************************************* 
  

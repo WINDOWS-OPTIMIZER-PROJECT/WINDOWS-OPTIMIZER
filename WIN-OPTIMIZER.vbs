@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.4.02 (Beta1) " 
+revision = "v.3.5.01 (Beta1) " 
 version = title & revision 
  
 
@@ -1247,6 +1247,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\I
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\CloseDwellTimeout", 300, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\MouseCloseThresholdPercent", 80, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\TouchCloseThresholdPercent", 80, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\HubsSidebarEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi\CharmsBarDesktopDelay", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi\CharmsBarImmersiveDelay", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\NOC_GLOBAL_SETTING_BADGE_ENABLED", 1, "REG_DWORD" 
@@ -2182,6 +2183,8 @@ If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgr
 & vbNewLine & "wird nach dem nächsten Neustart vollständig wirksam... " _ 
 & vbNewLine & vbNewLine & "Besucht unsere offizielle Projekt-Gruppe unter: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Besucht unser offizielles GitHub-Projekt unter: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " _ 
 & vbNewLine & vbNewLine & "Das System jetzt neu starten? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 
@@ -2190,6 +2193,8 @@ If Language = "english" Then shutdown = MsgBox (winversioncheck &" was optimized
 & vbNewLine & "will take effect after the next reboot... " _ 
 & vbNewLine & vbNewLine & "Don´t forget to visit our official Project-Group: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Don´t forget to visit our official GitHub-Project: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " _ 
 & vbNewLine & vbNewLine & "Restart the System now? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 If shutdown <> vbOK then WScript.Quit 
@@ -2204,12 +2209,13 @@ Err.Clear
 WScript.Quit 
  
  
-rem 	***************************************** 
-rem 	* !c3 WIN-OPTIMIZER 			* 
-rem 	* -written by 				* 
-rem 	* René Bengsch 				* 
-rem 	* info/contact @ 			* 
-rem 	* facebook.com/groups/WindowsOptimizer 	* 
-rem 	* e-m@il: hammanit@web.de	 	* 
-rem 	***************************************** 
+rem 	******************************************************************* 
+rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* -written by 							  * 
+rem 	* René Bengsch							  * 
+rem 	* info/contact @ 						  * 
+rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * 
+rem 	* facebook.com/groups/WindowsOptimizer				  * 
+rem 	* e-m@il: hammanit@web.de 	 				  * 
+rem 	******************************************************************* 
  

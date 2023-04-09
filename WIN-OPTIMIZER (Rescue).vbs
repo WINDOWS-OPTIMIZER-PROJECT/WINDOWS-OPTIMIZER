@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.4.02 (Rescue-Edition) " 
+revision = "v.3.5.01 (Rescue-Edition) " 
 version = title & revision 
  
 
@@ -1247,6 +1247,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\I
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\CloseDwellTimeout", 300, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\MouseCloseThresholdPercent", 80, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\Switcher\TouchCloseThresholdPercent", 80, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\HubsSidebarEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi\CharmsBarDesktopDelay", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi\CharmsBarImmersiveDelay", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\NOC_GLOBAL_SETTING_BADGE_ENABLED", 1, "REG_DWORD" 
@@ -2227,12 +2228,13 @@ Err.Clear
 WScript.Quit 
  
  
-rem 	***************************************** 
-rem 	* !c3 WIN-OPTIMIZER 			* 
-rem 	* -written by 				* 
-rem 	* René Bengsch 				* 
-rem 	* info/contact @ 			* 
-rem 	* facebook.com/groups/WindowsOptimizer 	* 
-rem 	* e-m@il: hammanit@web.de 		* 
-rem 	***************************************** 
+rem 	******************************************************************* 
+rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* -written by 							  * 
+rem 	* René Bengsch							  * 
+rem 	* info/contact @ 						  * 
+rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * 
+rem 	* facebook.com/groups/WindowsOptimizer				  * 
+rem 	* e-m@il: hammanit@web.de 	 				  * 
+rem 	******************************************************************* 
  

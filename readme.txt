@@ -1,11 +1,12 @@
- ***************************************** 
- * !c3 WINDOWS-OPTIMIZER 		 * 
- * -written by 				 * 
- * René Bengsch				 * 
- * info/contact @ 			 * 
- * facebook.com/groups/WindowsOptimizer	 * 
- * e-m@il: senseless-creature@web.de 	 * 
- ***************************************** 
+ ****************************************************************** 
+ * !c3 WINDOWS-OPTIMIZER 					  * 
+ * -written by 							  * 
+ * René Bengsch							  * 
+ * info/contact @ 						  * 
+ * https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER * 
+ * facebook.com/groups/WindowsOptimizer				  * 
+ * e-m@il: hammanit@web.de 	 				  * 
+ ****************************************************************** 
 
 
  ***** THE WINDOWS-OPTIMIZER-PROJECT *****
@@ -13,15 +14,18 @@
 Jetzt für alle Windows-Versionen geeignet!! 
 Dieses Tool nimmt verschiedene Anpassungen an Windows vor - Benutzung auf eigene Gefahr!!
 
+WINDOWS-OPTIMIZER-PROJECT auf GitHub: 
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
+
 Besucht unsere offizielle Projekt-Gruppe auf Facebook: 
 https://www.facebook.com/groups/WindowsOptimizer
 
 Aktuelle Version: 
-WINDOWS-OPTIMIZER v.3.4.02 (Beta1)
+WINDOWS-OPTIMIZER v.3.5.01 (Beta1)
 Hier der Direktlink (RAR): 
-https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
-Hier der Direktlink (OHNE RAR)
-https://www.dropbox.com/s/oocfdv99pgjl4bb/WIN-OPTIMIZER.vbs?dl=1
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
+Hier der Direktlink (OHNE RAR): 
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.vbs 
 New Updates coming soon..
 
 
@@ -58,7 +62,7 @@ Antwort:
 in den meisten Fällen JA - Bei Schadsoftware sieht es da leider anders aus. Genau hierfür gibt es eine Spezielle „RESCUE-VERSION“ des WINDOWS-OPTIMIZER, die zusätzlich alle Systemdateien prüft und fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurücksetzt. Im Anschluss wird noch eine vollständige Offline-Virenprüfung gestartet. 
 
 Hier geht es zur RESCUE-EDITION:
-https://www.facebook.com/groups/WindowsOptimizer/permalink/677114126078679/
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER%20(Rescue).vbs 
 
 8. Stimmt es, daß die Entwickler des WINDOWS-OPTIMIZER in Kontakt mit Microsoft stehen und so z.B. auf aktuelle Probleme wie den aktuellen RDP-Bug reagieren können UND dazu sogar kurzfristig gegebenenfalls ein Fix kommt?
 Antwort:
@@ -100,7 +104,7 @@ Der SPEED-TEST ist ein weiteres Script aus unserem Projekt, daß die Windowseigen
 17. Kann man auch alle Programme aus dem Projekt zusammen herunterladen?
 Antwort: 
 Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR): 
-https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 
 18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen? 
 Antwort: 
@@ -122,7 +126,28 @@ New Updates coming soon..
 Alle wichtigen Änderungen zusammengefasst: 
 
 Changelog: 
-v.3.4.02 (Beta1) (Aktuelles Release!) 
+v.3.5.01 (Beta1) (Aktuelles Release!) 
+* Ab sofort gibt es ein offizielles GitHub für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
+* Ab sofort werden alle Downloadlinks über das neue GitHub bereitgestellt: 
+* Hier der Direktlink (RAR): 
+	https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
+* Hier der Direktlink (OHNE RAR): 
+	https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.vbs 
+* Die Performance der Windows-Oberfläche wird verbessert. 
+* Die Performance des Microsoft-Store wird verbessert. 
+* Die Performance von Inplace-Updates und Reparaturen wird verbessert. 
+* Die Performance des Microsoft-Update-Assistenten wird verbessert. 
+* Die Performance des Media-Creation-Tools und des Erstellen eines USB-Boot-Sticks wird verbessert. 
+* Die Performance des DirectX-Installers wird verbessert. 
+* Die Performance und Genauigkeit des SPEED-TEST (WinSat) wird verbessert. 
+* Wenn mehrere Monitore gleichzeitig werwendet werden wird das Verhalten von Fenstern wenn einer oder mehrere Monitore deaktiviert oder ausgesteckt und/oder wieder aktiviert oder wieder eingesteckt werden konfiguriert. 
+* Die neue Bing-SideBar in MS-EDGE wird deaktiviert. 
+* Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
+* Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 
+* Etwas "Code-Cleanup". 
+
+Changelog: 
+v.3.4.02 (Beta1) 
 * Der Autostart des Windows Network Data Usage Monitoring Driver (ndu.sys) wird wieder aktiviert, weil es bei deaktiviertem Windows Network Data Usage Monitoring Driver bei bestimmten Hardwarekonstellationen unter Umständen zu Problemen mit der aktuellen Generation von NVIDIA-Grafiktreibern kommen kann, bei denen der Grafiktreiber beim Neustart einen "Fallback" macht und so die Auflösung herabgesetzt wird. 
 * Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
 * Etwas "Code-Cleanup". 

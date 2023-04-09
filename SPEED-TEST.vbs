@@ -211,6 +211,8 @@ If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgr
 & vbNewLine & "Primäre Festplatte: " & vbTab & DiskScore/10 _ 
 & vbNewLine & vbNewLine & "Besucht unsere offizielle Projekt-Gruppe unter: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Besucht unser offizielles GitHub-Projekt unter: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " _ 
 & vbNewLine & vbNewLine & "Test wiederholen? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 If Language = "english" Then shutdown = MsgBox (winversioncheck &" was tested successfully!!! " & vbNewLine _ 
@@ -224,6 +226,8 @@ If Language = "english" Then shutdown = MsgBox (winversioncheck &" was tested su
 & vbNewLine & "Primary hard drive: " & vbTab & DiskScore/10 _ 
 & vbNewLine & vbNewLine & "Don´t forget to visit our official Project-Group: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Don´t forget to visit our official GitHub-Project: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " _ 
 & vbNewLine & vbNewLine & "Repeat Performance-Test? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 If shutdown <> vbOK then WScript.Quit 

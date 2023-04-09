@@ -52,7 +52,9 @@ Err.Clear
 On Error Resume Next 
 Disabled = MsgBox ("Unsupported Update Patch is DISABLED... " _ 
 & vbNewLine & vbNewLine & "Visit our official Project-Group: " _ 
-& vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " ,vbSystemModal+vbExclamation, Version) 
+& vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Visit our official GitHub-Project: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " ,vbSystemModal+vbExclamation, Version) 
 Set WshShell = Nothing 
 Set objShell = Nothing 
 WScript.Quit 
@@ -79,7 +81,9 @@ Err.Clear
 On Error Resume Next 
 Enabled = MsgBox ("Unsupported Update Patch is ENABLED... " _ 
 & vbNewLine & vbNewLine & "Visit our official Project-Group: " _ 
-& vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " ,vbSystemModal+vbExclamation, Version) 
+& vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
+& vbNewLine & vbNewLine & "Visit our official GitHub-Project: " _ 
+& vbNewLine & "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER " ,vbSystemModal+vbExclamation, Version) 
 Set WshShell = Nothing 
 Set objShell = Nothing 
 WScript.Quit 

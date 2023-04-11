@@ -1,5 +1,5 @@
  ****************************************************************** 
- * !c3 WINDOWS-OPTIMIZER 					  * 
+ * The WINDOWS-OPTIMIZER-PROJECT 				  * 
  * -written by 							  * 
  * René Bengsch							  * 
  * info/contact @ 						  * 

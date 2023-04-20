@@ -1906,7 +1906,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Mouclass
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USB\DisableSelectiveSuspend", 1, "REG_DWORD"  
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Desktop\WheelScrollLines", 3, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\DoubleClickSpeed", 400, "REG_SZ" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseSensitivity", 20, "REG_SZ" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseSensitivity", 14, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseSpeed", 2, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseThreshold1", 0, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseThreshold2", 0, "REG_SZ" 

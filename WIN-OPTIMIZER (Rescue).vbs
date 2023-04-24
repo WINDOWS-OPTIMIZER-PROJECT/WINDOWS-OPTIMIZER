@@ -1288,6 +1288,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explore
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\DisableNotificationCenter", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer\ForceStartSize", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseOLEDTaskbarTransparency", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\PromptOnSecureDesktop", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm\ForceEffectMode", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\Settings\Network\ReplaceVan", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AicEnabled", "Recommendations", "REG_SZ" 

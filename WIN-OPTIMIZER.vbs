@@ -1728,6 +1728,14 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\I
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Cache\Content\CacheLimit", 256000, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\5.0\Cache\Content\CacheLimit", 256000, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\5.0\Cache\ContentLimit", 250, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\BackgroundModeEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\EfficiencyModeOnPowerEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\HardwareAccelerationModeEnabled", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\StartupBoostEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\BackgroundModeEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\EfficiencyModeOnPowerEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\HardwareAccelerationModeEnabled", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\StartupBoostEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Policies\Microsoft\MicrosoftEdge\Internet Settings\UnlockHomeButton", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main\AllowPrelaunch", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Policies\Microsoft\MicrosoftEdge\Main\AllowPrelaunch", 0, "REG_DWORD" 
@@ -1830,6 +1838,9 @@ Err.Clear
 On Error Resume Next 
 WshShell.Run "netsh int tcp set global rss=enabled", 1, True 
 Err.Clear  
+On Error Resume Next 
+WshShell.Run "netsh int tcp set global rsc=disabled", 1, True 
+Err.Clear 
 On Error Resume Next 
 WshShell.Run "netsh int ipv4 set dynamicport tcp start=1025 num=64511", 1, True 
 Err.Clear  

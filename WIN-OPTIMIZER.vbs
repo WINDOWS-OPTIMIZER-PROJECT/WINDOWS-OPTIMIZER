@@ -2085,6 +2085,12 @@ On Error Resume Next
 WshShell.Run "net start bits", 1, True
 Err.Clear 
 On Error Resume Next 
+WshShell.Run "winget source reset --force", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "winget source update", 1, True 
+Err.Clear 
+On Error Resume Next 
 WshShell.Run "WSReset.exe -i", 1, True 
 Err.Clear 
 End Sub  

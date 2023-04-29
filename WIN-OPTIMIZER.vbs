@@ -1847,6 +1847,9 @@ Err.Clear
 On Error Resume Next 
 WshShell.Run "netsh int tcp set global autotuninglevel=experimental", 1, True 
 Err.Clear 
+On Error Resume Next 
+WshShell.Run "netsh int tcp set supplemental internet congestionprovider=ctcp", 1, True 
+Err.Clear 
 
 Rem >> RDP << 
 Err.Clear 

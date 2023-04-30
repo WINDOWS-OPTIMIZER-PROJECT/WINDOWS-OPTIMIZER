@@ -1858,6 +1858,7 @@ Err.Clear
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\fAllowToGetHelp", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\fDenyTSConnections", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\DWMFRAMEINTERVAL", 15, "REG_DWORD" 
  
 Rem >> Regdone << 
 Err.Clear 

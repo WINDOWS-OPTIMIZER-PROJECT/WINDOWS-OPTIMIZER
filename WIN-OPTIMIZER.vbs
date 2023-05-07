@@ -318,11 +318,20 @@ If Right(strKey, 1) = "\" Then
 strFullPath = strKey & strKeyName
 Else
 strFullPath = strKey & "\" & strKeyName
-End If
-objRegistry.DeleteValue strRegRoot, strFullPath, "StateFlags" & Right("0000" & intJobNum, 4)
-Next
-End If
-End If
+End If 
+next 
+Err.Clear 
+On Error Resume Next 
+For Each Process in GetObject("winmgmts:"). _ 
+ExecQuery ("select * from Win32_Process where name='cleanmgr.exe'") 
+Process.terminate(0) 
+Err.Clear 
+On Error Resume Next 
+objRegistry.DeleteValue strRegRoot, strFullPath, "StateFlags" & Right("0000" & intJobNum, 4) 
+Err.Clear 
+Next 
+End If 
+End If 
  
 Rem >> Defrag.exe << 
 WshShell.Run "dfrgui.exe", 1, false 

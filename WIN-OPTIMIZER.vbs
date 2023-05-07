@@ -1109,13 +1109,15 @@ MyFile.WriteLine ("Next ")
 MyFile.WriteLine ("Err.Clear ") 
 MyFile.WriteLine ("WScript.Quit ") 
 MyFile.WriteLine (" ") 
-MyFile.WriteLine ("rem 	************************************* ") 
-MyFile.WriteLine ("rem 	* !c3 AUTOSTART-OPTIMIZER	    * ") 
-MyFile.WriteLine ("rem 	* -written by 			    * ") 
-MyFile.WriteLine ("rem 	* René Bengsch 			    * ") 
-MyFile.WriteLine ("rem 	* info/contact @ 		    * ") 
-MyFile.WriteLine ("rem 	* e-M@il: senseless-creature@web.de * ") 
-MyFile.WriteLine ("rem 	************************************* ") 
+MyFile.WriteLine ("rem 	******************************************************************* ") 
+MyFile.WriteLine ("rem 	* !c3 AUTOSTART-OPTIMIZER is Part of the WINDOWS-OPTIMIZER 	  * ") 
+MyFile.WriteLine ("rem 	* -written by 							  * ") 
+MyFile.WriteLine ("rem 	* René Bengsch							  * ") 
+MyFile.WriteLine ("rem 	* info/contact @ 						  * ") 
+MyFile.WriteLine ("rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * ") 
+MyFile.WriteLine ("rem 	* https://facebook.com/groups/WindowsOptimizer			  * ") 
+MyFile.WriteLine ("rem 	* e-m@il: hammanit@web.de 	 				  * ") 
+MyFile.WriteLine ("rem 	******************************************************************* ") 
 MyFile.WriteLine (" ")  
 Set fso = Nothing 
 Startup = Nothing 
@@ -2256,7 +2258,7 @@ rem 	* -written by 							  *
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 
 rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * 
-rem 	* facebook.com/groups/WindowsOptimizer				  * 
+rem 	* https://facebook.com/groups/WindowsOptimizer			  * 
 rem 	* e-m@il: hammanit@web.de 	 				  * 
 rem 	******************************************************************* 
  

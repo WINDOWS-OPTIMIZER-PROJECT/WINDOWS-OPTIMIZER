@@ -246,7 +246,7 @@ rem 	* -written by 							  *
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 
 rem 	* https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER  * 
-rem 	* facebook.com/groups/WindowsOptimizer				  * 
+rem 	* https://facebook.com/groups/WindowsOptimizer			  * 
 rem 	* e-m@il: hammanit@web.de 	 				  * 
 rem 	******************************************************************* 
  

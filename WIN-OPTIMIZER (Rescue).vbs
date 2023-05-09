@@ -2054,7 +2054,7 @@ Else
 strFullPath = strKey & "\" & strKeyName
 End If
 objRegistry.SetDWORDValue strRegRoot, strFullPath, "StateFlags", 1
-objRegistry.SetDWORDValue strRegRoot, strFullPath, "Priority", 100 
+objRegistry.SetDWORDValue strRegRoot, strFullPath, "Priority", 300 
 Next
 End If
 End If	

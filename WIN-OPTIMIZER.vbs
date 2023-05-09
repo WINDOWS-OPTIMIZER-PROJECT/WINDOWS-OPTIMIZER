@@ -1429,6 +1429,9 @@ On Error Resume Next
 objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Set-MpPreference -EnableLowCpuPriority 0 -v"), 1, True 
 Err.Clear 
 On Error Resume Next 
+objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Set-MpPreference -MAPSReporting 2 -v"), 1, True 
+Err.Clear 
+On Error Resume Next 
 objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Set-MpPreference -PUAProtection 2 -v"), 1, True 
 Err.Clear 
 On Error Resume Next 

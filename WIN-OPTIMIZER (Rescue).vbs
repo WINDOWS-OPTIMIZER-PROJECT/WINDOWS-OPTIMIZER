@@ -2276,7 +2276,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

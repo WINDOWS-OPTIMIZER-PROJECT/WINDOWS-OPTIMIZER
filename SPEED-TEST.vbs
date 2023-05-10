@@ -6,7 +6,7 @@ Rem	*************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 SPEED-TEST "
-revision = "v.1.3.01 (Beta1) "
+revision = "v.1.4.01 (Beta1) "
 version = title & revision
  
 Rem >> Get Rights <<
@@ -99,7 +99,7 @@ On Error Resume Next
 Rem >> auslesen phys. RAM << 
 Err.Clear 
 On Error Resume Next 
-Speicher = 0
+Speicher = 0 
 strComputer = "." 
 Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2") 
 Set colItems = objWMIService.ExecQuery("Select * from Win32_LogicalMemoryConfiguration",,48) 
@@ -115,7 +115,7 @@ If Speicher = 0 then Set objWMIService = GetObject("winmgmts:" _
 Set colComputer = objWMIService.ExecQuery _
 ("Select * from Win32_ComputerSystem")
 For Each objComputer in colComputer 
-Speichern = int(objComputer.TotalPhysicalMemory/1024/1000/1000)
+Speichern = int(objComputer.TotalPhysicalMemory/1024/1000/1000) 
 Speicher = Speichern*1024
 Next 
 If Speicher = 0 then SpeicherUser
@@ -147,13 +147,13 @@ If Language = "english" then SPEEDTEST = MsgBox (winversioncheck &" was successf
 & vbNewLine & "Start the Performance-Test now? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 If SPEEDTEST <> vbOK then AbortMessage: WScript.quit 
-If SPEEDTEST = vbOK then Performancetest
+If SPEEDTEST = vbOK then Performancetest 
 
-Sub Performancetest ()
+Sub Performancetest () 
 Rem >> Minimize All << 
 Err.Clear 
 On Error Resume Next 
-Set objShell = CreateObject("Shell.Application")
+Set objShell = CreateObject("Shell.Application") 
 Call objShell.MinimizeAll
 Err.Clear 
 On Error Resume Next 
@@ -181,26 +181,30 @@ On Error Resume Next
 WshShell.Run "Explorer.exe", 1, True 
 Err.Clear 
 On Error Resume Next 
-CPUScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\CPUScore")
+CPUScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\CPUScore") 
 Err.Clear 
 On Error Resume Next 
-MemoryScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\MemoryScore")
+MemoryScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\MemoryScore") 
 Err.Clear 
 On Error Resume Next 
-GraphicsScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\DWMScore")
+GraphicsScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\DWMScore") 
 Err.Clear 
 On Error Resume Next 
-D3DScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\D3DScore")
+D3DScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\D3DScore") 
 Err.Clear 
 On Error Resume Next 
-DiskScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\DiskScore")
+DiskScore = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\DiskScore") 
 Err.Clear 
 On Error Resume Next 
-WinSPRLevel = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\WinCRSScore")
+WinSPRLevel = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\WinCRSScore") 
 Err.Clear 
 On Error Resume Next 
+ExitCode = WSHShell.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinSAT\LastExitCodeCantMsg") 
+Err.Clear 
 
+On Error Resume Next 
 If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgreich getestet!!! " & vbNewLine _ 
+& vbNewLine & "Exit-Code: " & vbTab & vbTab & ExitCode & vbNewLine _  
 & vbNewLine & "Zeit (sec.) :" & vbTab & vbTab & ende-start _ 
 & vbNewLine & vbNewLine & "Gesamtbewertung: " & vbTab & WinSPRLevel/10 & vbNewLine _ 
 & vbNewLine & "Komponente " & vbTab & vbTab & "Teilbewertung" _ 
@@ -216,6 +220,7 @@ If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgr
 & vbNewLine & vbNewLine & "Test wiederholen? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 If Language = "english" Then shutdown = MsgBox (winversioncheck &" was tested successfully!!! " & vbNewLine _ 
+& vbNewLine & "Exit-Code: " & vbTab & vbTab & ExitCode & vbNewLine _  
 & vbNewLine & "Time (sec.) :" & vbTab & vbTab & ende-start _ 
 & vbNewLine & vbNewLine & "System Base-Score: " & vbTab & WinSPRLevel/10 & vbNewLine _ 
 & vbNewLine & "Component " & vbTab & vbTab & "Subscore" _ 
@@ -241,7 +246,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

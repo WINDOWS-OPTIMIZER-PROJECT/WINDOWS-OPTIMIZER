@@ -1806,6 +1806,8 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Dnscache
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Dnscache\Parameters\NetFailureErrorPopupLimit", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HTTP\Parameters\EnableAggressiveMemoryUsage", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\IRPStackSize", 50, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\ServiceDllUnloadOnStop", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\Size", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\SizReqBuf", 65535, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters\DirectoryCacheEntriesMax", 4096, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters\DirectoryCacheEntrySizeMax", 4096, "REG_DWORD" 

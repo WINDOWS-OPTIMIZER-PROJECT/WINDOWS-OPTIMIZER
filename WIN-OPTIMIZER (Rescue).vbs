@@ -2214,7 +2214,7 @@ On Error Resume Next
 WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
 Err.Clear 
 On Error Resume Next  
-WshShell.Run "cmd.exe /c cd c:\Program Files\Windows Defender && MpCmdRun.exe -RemoveDefinitions -dynamicsignatures && MPCMDRUN.exe -SignatureUpdate", 1, true 
+WshShell.Run "cmd.exe /c cd %ProgramFiles%\Windows Defender && MpCmdRun.exe -removedefinitions -dynamicsignatures && MpCmdRun.exe -SignatureUpdate", 1, true 
 Err.Clear 
 On Error Resume Next 
 objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Update-MpSignature -UpdateSource MicrosoftUpdateServer -v"), 1, True 

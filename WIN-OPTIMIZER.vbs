@@ -990,6 +990,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\UseLowPr
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\Gather\Windows\SystemIndex\EnableFindMyFiles", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\Gather\Windows\SystemIndex\RespectPowerModes", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\Gathering Manager\DisableBackOff", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\Gathering Manager\PerformanceLevel", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences\ArchivedFiles", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences\AutoWildCard", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences\EnableNaturalQuerySyntax", 0, "REG_DWORD" 

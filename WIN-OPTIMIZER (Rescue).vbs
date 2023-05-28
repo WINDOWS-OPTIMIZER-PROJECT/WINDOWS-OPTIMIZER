@@ -2098,6 +2098,9 @@ Err.Clear
 On Error Resume Next 
 WshShell.Run "cmd.exe /c del /F /S /Q %temp%", 1, True 
 Err.Clear  
+On Error Resume Next 
+WshShell.Run "cmd.exe /c del /F /S /Q %Windir%\Temp", 1, True 
+Err.Clear  
  
 Rem >> Explorer.exe neu starten << 
 Err.Clear 

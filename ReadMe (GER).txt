@@ -14,14 +14,18 @@
 Jetzt für alle Windows-Versionen geeignet!! 
 Dieses Tool nimmt verschiedene Anpassungen an Windows vor - Benutzung auf eigene Gefahr!!
 
+
 WINDOWS-OPTIMIZER-PROJECT auf GitHub: 
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
 
 Besucht unsere offizielle Projekt-Gruppe auf Facebook: 
-https://www.facebook.com/groups/WindowsOptimizer
+https://www.facebook.com/groups/WindowsOptimizer 
+
+Discord: https://discord.gg/m3pNNvWegX
+
 
 Aktuelle Version: 
-WINDOWS-OPTIMIZER v.3.5.01 (Beta1)
+WINDOWS-OPTIMIZER v.3.6.01 (Beta1)
 Hier der Direktlink (RAR): 
 https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
 Hier der Direktlink (OHNE RAR)
@@ -128,7 +132,33 @@ New Updates coming soon..
 Alle wichtigen Änderungen zusammengefasst: 
 
 Changelog: 
-v.3.5.01 (Beta1) (Aktuelles Release!) 
+v.3.6.01 (Beta1) (Aktuelles Release!) 
+* Windows-Optimizer-Project Discord: https://discord.gg/m3pNNvWegX
+* Neues Feature: Ab sofort können veraltete in Windows installierte Programme direkt über den WINDOWS-OPTIMIZER aktualisiert werden (optional für w10/11, experimentell). 
+* Die automatische CPU- und RAM-Cache-Zuordnung von Threadpoolthreads wird dynamisch konfiguriert um die Leistung und Skalierbarkeit auf NUMA-Hardware zu verbessern. 
+* Deutlich bessere Netzwerkperformance, bessere Reaktionszeiten und kürzere Latenzen im Netzwerk und im Internet beim Surfen und beim Daddeln. 
+* RSS wird falls deaktiviert wieder aktiviert und auf maximale Performance hin konfiguriert. 
+* RSC wird zugunsten der besseren Performance systemweit deaktiviert. 
+* NET-TCPIP wird vom moderateren Windowsstandart "Cubic" auf den deutlich perfomanteren Standart "CTCP" umkonfiguriert. 
+* Die Anzahl der maximal möglichen IPv4/IPv6 TCP/UDP User-Ports wird auf das Maximum erweitert, vollständig konfiguriert und für das System dynamisch freigegeben. 
+* In Edge-Chromium werden die wichtigsten Performance-Einstellungen auf die bestmögliche Performance vorkonfiguriert. 
+* Prozesspriorität und Datendurchsatz für folgende Webbrowser erhöht: chrome.exe/ firefox.exe/ iexplorer.exe/ msedge.exe/ seamonkey.exe/ safari.exe/ opera.exe/ OperaGX/ tor.exe/ brave.exe/ vivaldi.exe (weitere kommen noch - falls ihr einen Browser nutz, der hier noch fehlt, dann meldet euch gerne bei mir und ich baue euren Browser mit ein). 
+* Prozesspriorität und Datendurchsatz für folgende portablen Webbrowser erhöht: firefoxPortable.exe/ OperaPortable.exe/ OperaGXPortable.exe (weitere kommen noch - falls ihr einen Browser nutz, der hier noch fehlt, dann meldet euch gerne bei mir und ich baue euren Browser mit ein). 
+* Die Performance des Microsoft-Installers (msiexec.exe) wird verbessert. 
+* Die Performance der windowseigenen Datenträgerbereinigung (Cleanmgr.exe) wird verbessert. 
+* Die Bildwiederholfrequenz in Windows-basierten Remotesitzungen (RDP/Citrix usw.) wird von den standartmäßigen 30FPS auf 60FPS erhöht. 
+* Für NVIDIA-Grafik wird für den aktiven PhysX-Prozessor die Einstellung "Automatische Auswahl" als Standart aktiviert. 
+* Veraltete oder fehlerhafte Signatur-Updates von Windows-Defender werden gelöscht und durch aktuelle Signatur-Updates ersetzt. 
+* Die Nervige Meldung vom Windows-Defender, daß die "Automatische Übermittlung von Beispielen" deaktiviert wurde, wird deaktiviert - Beispiele können natürlich weiterhin wie gewohnt manuell an Microsoft gesendet werden. 
+* Der erweiterte cloudbasierte Schutz in Windows-Defender wird falls deaktiviert automatisch durch das Script aktiviert. 
+* Prozesspriorität und Datendurchsatz für folgende Programme erhöht: WinRAR.exe/ 7ZIP.exe (7zFM.exe/ 7zG.exe) 
+* Die voreingestellte Geschwindigkeit der Mousebeschleunigung ist ab sofort für alle Zeit raus. 
+* Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
+* Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 
+* Etwas "Code-Cleanup". 
+
+Changelog: 
+v.3.5.01 (Beta1) 
 * Ab sofort gibt es ein offizielles GitHub-Projekt für das WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
 * Ab sofort werden alle Downloadlinks auch über das neue GitHub-Projekt bereitgestellt. 
 * Die I/O-Reaktionszeiten von verschiedenen Hardware-Komponenten wie Grafik-Controller, Sound-Controller, Netzwerk-Controller, Festplatten-Controller, USB-Controller werden treiberseitig verbessert. 
@@ -153,7 +183,7 @@ v.3.4.02 (Beta1)
 
 Changelog: 
 v.3.4.01 (Beta1) 
-* Ab sofort können fehlende oder veraltete DirectX-Laufzeitkomponenten direkt über den WINDOWS-OPTIMIZER installiert und aktualisiert werden (optional, experimentell).
+* Neues Feature: Ab sofort können fehlende oder veraltete DirectX-Laufzeitkomponenten direkt über den WINDOWS-OPTIMIZER installiert und aktualisiert werden (optional, experimentell).
 * Alle Desktop-Heap-Speicherbereiche werden nochmal deutlich erweitert, die Anzahl der maximal möglichen Threats wird verdoppelt, um den Durchsatz, Latenzen und Reaktionszeit bei Eingaben innerhalb Windows weiter zu verbessern.  
 * Vollständige Konfiguration der hiberfil.sys - Die Datei wird ab sofort automatisch perfekt an die verbaute Hardware angepasst. 
 * Nervige Benachrichtigungen für Edge werden deaktiviert, um Werbe-Spam zu unterbinden. 

@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.5.01 (Rescue-Edition) " 
+revision = "v.3.6.01 (Rescue-Edition) " 
 version = title & revision 
  
 
@@ -844,6 +844,8 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableVirtualization", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\7zFM.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\7zFM.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\7zG.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\7zG.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\brave.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\brave.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\chrome.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -854,14 +856,20 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwebsetup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwebsetup.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwsetup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwsetup.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefox.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefox.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefoxPortable.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefoxPortable.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\gpupdate.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\gpupdate.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\iexplore.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\iexplore.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msiexec.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msiexec.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\opera.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\opera.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaGXPortable.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -1862,6 +1870,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Pa
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxConnectRetransmissions", 2, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmissions", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpTimedWaitDelay", 30, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\StrictTimeWaitSeqCheck", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\DnsPriority", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\HostsPriority", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\LocalPriority", 1, "REG_DWORD" 
@@ -1875,6 +1884,15 @@ WshShell.Run "netsh int tcp set global rsc=disabled", 1, True
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "netsh int ipv4 set dynamicport tcp start=1025 num=64511", 1, True 
+Err.Clear  
+On Error Resume Next 
+WshShell.Run "netsh int ipv4 set dynamicport udp start=1025 num=64511", 1, True 
+Err.Clear  
+On Error Resume Next 
+WshShell.Run "netsh int ipv6 set dynamicport tcp start=1025 num=64511", 1, True 
+Err.Clear  
+On Error Resume Next 
+WshShell.Run "netsh int ipv6 set dynamicport udp start=1025 num=64511", 1, True 
 Err.Clear  
 On Error Resume Next 
 WshShell.Run "netsh int tcp set global autotuninglevel=experimental", 1, True 
@@ -2194,7 +2212,22 @@ if fso2.FileExists(deletefilepath) then
     fso2.DeleteFile deletefilepath, True
 End if 
 Err.Clear 
-End Sub
+End Sub 
+
+Sub UpdateAllApps ()
+Err.Clear 
+On Error Resume Next   
+If Language = "deutsch" then UpdateApps = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
+& vbNewLine & "durch den " & title & " noch alle installierten Programme Aktuallisieren?? " & vbNewLine _ 
+& vbNewLine & "Dieser Vorgang kann mehrere Minuten dauern. ", _ 
+vbSystemModal + vbYesNo, Version) 
+
+If Language = "english" then UpdateApps = MsgBox ("Do you want to update all installed Programms? " & vbNewLine _ 
+& vbNewLine & "This Process can take a few minutes. ", _ 
+vbSystemModal + vbYesNo, Version) 
+If UpdateApps = vbYes then WshShell.Run "winget upgrade --accept-source-agreements --all", 3, True 
+Err.Clear 
+End Sub 
  
 Rem >> Optimize-Windows << 
 Err.Clear 
@@ -2212,6 +2245,11 @@ Err.Clear
 On Error Resume Next 
 ende = Timer 
 DirectX
+Err.Clear 
+restart = Timer 
+On Error Resume Next 
+ende = Timer 
+If WinValue = "10." then UpdateAllApps
 Err.Clear 
 restart = Timer 
 On Error Resume Next 

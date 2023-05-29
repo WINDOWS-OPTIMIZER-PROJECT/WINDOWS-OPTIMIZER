@@ -26,14 +26,18 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Ora adatto a tutte le versioni di Windows!!
 Questo strumento apporta varie modifiche a Windows: usalo a tuo rischio!!
 
+
 WINDOWS-OPTIMIZER-PROJECT su GitHub: 
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER 
 
 Visita il nostro gruppo di progetto ufficiale su Facebook:
 https://www.facebook.com/groups/WindowsOptimizer
 
+Discord: https://discord.gg/m3pNNvWegX
+
+
 Versione attuale:
-OTTIMIZZATORE DI WINDOWS v.3.5.01 (Beta1)  "WINDOWS-OPTIMIZER v.3.5.01 (Beta1)"
+OTTIMIZZATORE DI WINDOWS v.3.6.01 (Beta1)  "WINDOWS-OPTIMIZER v.3.5.01 (Beta1)"
 Ecco il link diretto (RAR):
 https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
 Ecco il link diretto (SENZA RAR)
@@ -199,11 +203,37 @@ Nuovi aggiornamenti in arrivo..
 
 
 ***** Cosa c'è di nuovo? ***** 
-Tutte le modifiche importanti riassunte:
+Tutte le modifiche importanti riassunte: 
 
 Changelog: (registro delle modifiche)
+v.3.6.01 (Beta1) (Versione corrente!)
+* Windows-Optimizer-Project Discord: https://discord.gg/m3pNNvWegX
+* Nuova funzionalità: i programmi obsoleti installati in Windows possono ora essere aggiornati direttamente tramite WINDOWS OPTIMIZER (opzionale per w10/11, sperimentale).
+* L'allocazione automatica della cache di CPU e RAM dei thread del pool di thread è configurata dinamicamente per migliorare le prestazioni e la scalabilità sull'hardware NUMA.
+* Prestazioni di rete significativamente migliori, tempi di risposta migliori e latenze più brevi nella rete e su Internet durante la navigazione e il gioco.
+* L'RSS verrà riattivato se disattivato e configurato per le massime prestazioni.
+* RSC verrà disabilitato a livello di sistema per prestazioni migliori.
+* NET-TCPIP è stato riconfigurato dallo standard Windows più moderato 'Cubic' allo standard molto più potente 'CTCP'.
+* Il numero massimo di possibili porte utente IPv4/IPv6 TCP/UDP è esteso al massimo, completamente configurato e rilasciato dinamicamente per il sistema.
+* In Edge-Chromium, le impostazioni delle prestazioni più importanti sono preconfigurate per le migliori prestazioni possibili.
+* Aumento della priorità del processo e del throughput dei dati per i seguenti browser web: chrome.exe/ firefox.exe/ iexplorer.exe/ msedge.exe/ seamonkey.exe/ safari.exe/ opera.exe/ OperaGX/ tor.exe/ brave.exe / vivaldi.exe (altro in arrivo - se stai utilizzando un browser che non è elencato qui, contattami e integrerò il tuo browser).
+* Aumento della priorità del processo e del throughput dei dati per i seguenti browser Web portatili: firefoxPortable.exe/ OperaPortable.exe/ OperaGXPortable.exe (altri in arrivo - se stai utilizzando un browser che manca ancora qui, contattami e integrerò il tuo navigatore).
+* Le prestazioni del programma di installazione Microsoft (msiexec.exe) sono migliorate.
+* Le prestazioni di Windows Disk Cleanup (Cleanmgr.exe) sono migliorate.
+* La frequenza di aggiornamento nelle sessioni remote basate su Windows (RDP/Citrix ecc.) è aumentata dai 30FPS predefiniti a 60FPS.
+* Per la grafica NVIDIA, il processore PhysX attivo è impostato su 'Selezione automatica' per impostazione predefinita.
+* Gli aggiornamenti delle firme obsoleti o difettosi di Windows Defender vengono eliminati e sostituiti con gli aggiornamenti delle firme correnti.
+* Il fastidioso messaggio di Windows Defender che l''Invio automatico di campioni' è stato disabilitato verrà disabilitato - i campioni possono ovviamente essere ancora inviati a Microsoft manualmente come al solito.
+* La protezione avanzata basata su cloud in Windows Defender viene abilitata automaticamente dallo script se disabilitata.
+* Priorità del processo e velocità di trasferimento dei dati aumentate per i seguenti programmi: WinRAR.exe/ 7ZIP.exe (7zFM.exe/ 7zG.exe)
+* La velocità di accelerazione predefinita del mouse ora è sparita per sempre.
+* Piccole modifiche al codice del programma che migliorano le prestazioni e la stabilità. 
+* Vari valori all'interno del registro, impostati da altri "strumenti di ottimizzazione", vengono ripristinati come sempre, su valori standart sicuri.
+  L'elenco è lungo anche qui.
+* Un po 'di 'pulizia del codice'.
 
-* v.3.5.01 (Beta1) (Versione corrente!)
+Changelog: (registro delle modifiche)
+* v.3.5.01 (Beta1) 
 * Ora c'è un progetto GitHub ufficiale per il WINDOWS-OPTIMIZER-PROJECT: https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER!)
 * D'ora in poi, tutti i link per il download saranno resi disponibili anche tramite il nuovo progetto GitHub: 
   https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar
@@ -236,7 +266,7 @@ v.3.4.02 (Beta1)
 
 Changelog: (registro delle modifiche)
 v.3.4.01 (Beta1) 
-* D'ora in poi, i componenti runtime DirectX mancanti o obsoleti possono essere installati direttamente tramite WINDOWS OPTIMIZER è 
+* Nuova funzionalità: D'ora in poi, i componenti runtime DirectX mancanti o obsoleti possono essere installati direttamente tramite WINDOWS OPTIMIZER è 
   (facoltativo, sperimentale).
 * Tutte le aree di archiviazione heap desktop saranno notevolmente ampliate, il numero massimo di possibili minacce sarà raddoppiato, 
   per migliorare ulteriormente la velocità effettiva, la latenza e la velocità di risposta per l'input all'interno di Windows.

@@ -2176,7 +2176,7 @@ Err.Clear
 On Error Resume Next   
 If Language = "deutsch" then DX = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
 & vbNewLine & "durch den " & title & " noch alle optionalen " _ 
-& vbNewLine & "DirectX-Laufzeitkomponenten Installieren und Aktuallisieren?? ", _ 
+& vbNewLine & "DirectX-Laufzeitkomponenten Installieren und Aktualisieren?? ", _ 
 vbSystemModal + vbYesNo, Version) 
 
 If Language = "english" then DX = MsgBox ("Do you want to install and update all optional " _ 
@@ -2218,7 +2218,7 @@ Sub UpdateAllApps ()
 Err.Clear 
 On Error Resume Next   
 If Language = "deutsch" then UpdateApps = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
-& vbNewLine & "durch den " & title & " noch alle installierten Programme Aktuallisieren?? " & vbNewLine _ 
+& vbNewLine & "durch den " & title & " noch alle installierten Programme Aktualisieren?? " & vbNewLine _ 
 & vbNewLine & "Dieser Vorgang kann mehrere Minuten dauern. ", _ 
 vbSystemModal + vbYesNo, Version) 
 

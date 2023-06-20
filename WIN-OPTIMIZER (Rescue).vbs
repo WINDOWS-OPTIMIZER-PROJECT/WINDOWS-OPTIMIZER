@@ -820,6 +820,11 @@ oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerLev
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerLevelAC", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDefault", 2 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDefaultAC", 1 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForDP", 400 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForHDMI", 400 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DeepColorHDMIDisable", 0 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableRGBFullRange", 1 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "SetDefaultFullRGBRangeOnHDMI", 1 
 End If 
 Next 
 Err.Clear 
@@ -934,6 +939,7 @@ On Error Resume Next
 WshShell.Run "diskperf -n", 1, True 
 Err.Clear 
 On Error Resume Next 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\LongPathsEnabled", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisableCompression", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsDisableEncryption", 0, "REG_DWORD" 

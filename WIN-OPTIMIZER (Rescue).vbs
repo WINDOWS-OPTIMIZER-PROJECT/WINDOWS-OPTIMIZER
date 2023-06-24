@@ -398,22 +398,13 @@ Process.terminate(0)
 next 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "net stop bits", 1, True
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "net stop wuauserv", 1, True
-Err.Clear 
-On Error Resume Next 
-For Each Process in GetObject("winmgmts:"). _ 
-ExecQuery ("select * from Win32_Process where name='wuauclt.exe'") 
-Process.terminate(0) 
-next 
-Err.Clear 
-On Error Resume Next 
 WshShell.Run "taskkill /f /fi “status eq not responding”", 1, True
 Err.Clear 
 
 Rem >> Windows-Update << 
+On Error Resume Next 
+WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
+Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching\DriverUpdateWizardWuSearchEnabled", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoRebootWithLoggedOnUsers", 1,"REG_DWORD" 
@@ -2145,7 +2136,7 @@ Process.terminate(0)
 next 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "net start bits", 1, True
+WshShell.Run "cmd.exe /c net start wuauserv & net start bits", 3, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "winget source reset --force", 1, True 
@@ -2264,10 +2255,7 @@ Err.Clear
 
 Rem >> Abschliessend alle Hintergrundprozesse Ausführen << 
 On Error Resume Next 
-WshShell.Run "net start bits", 1, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "net start wuauserv", 1, True 
+WshShell.Run "cmd.exe /c net start wuauserv & net start bits", 3, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 

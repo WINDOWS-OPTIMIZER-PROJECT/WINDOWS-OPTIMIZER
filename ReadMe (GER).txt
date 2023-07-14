@@ -25,7 +25,7 @@ Discord: https://discord.gg/m3pNNvWegX
 
 
 Aktuelle Version: 
-WINDOWS-OPTIMIZER v.3.6.01 (Beta1)
+WINDOWS-OPTIMIZER v.3.7.01 (Beta1)
 Hier der Direktlink (RAR): 
 https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
 Hier der Direktlink (OHNE RAR)
@@ -132,7 +132,18 @@ New Updates coming soon..
 Alle wichtigen Änderungen zusammengefasst: 
 
 Changelog: 
-v.3.6.01 (Beta1) (Aktuelles Release!) 
+v.3.7.01 (Beta1) (Aktuelles Release!) 
+* HDR-Deep-Color über HDMI/Displayport wird falls die Hardware HDR unterstützt standartmäßig automatisch aktiviert.  
+* Der HDMI/Displayport-Farbraum wird von den Standartmäßigen 16-235 auf 0-255 erweitert. 
+* Die Erkennung von Geräten über HDMI/Displayport wird verbessert. 
+* Obwohl neuere Dateisysteme (z.B. NTFS) längere Pfad- und Ordnernamen unterstützen, ist das maximale Limit vom System standartmäßig auf 260 Zeichen begrenzt. Dieses Limit wird unter bestimmten Voraussetzungen aufgehoben. Dadurch können auch längere Pfad- und Ordnernamen verwendet werden.
+* Ab sofort wird das Downloadverzeichnis für Windows- und Storeupdates vollständig aufgeräumt um veraltete oder nicht lauffähige Setup-Dateien oder fehlerhafte Logdateien sicher zu entfernen und/oder "hängende" Updates zu fixen. 
+* Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
+* Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 
+* Etwas "Code-Cleanup". 
+
+Changelog: 
+v.3.6.01 (Beta1) 
 * Windows-Optimizer-Project Discord: https://discord.gg/m3pNNvWegX
 * Neues Feature: Ab sofort können veraltete in Windows installierte Programme direkt über den WINDOWS-OPTIMIZER aktualisiert werden (optional für w10/11, experimentell). 
 * Die automatische CPU- und RAM-Cache-Zuordnung von Threadpoolthreads wird dynamisch konfiguriert um die Leistung und Skalierbarkeit auf NUMA-Hardware zu verbessern. 

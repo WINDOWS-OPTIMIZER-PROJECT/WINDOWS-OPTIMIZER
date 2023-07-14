@@ -37,7 +37,7 @@ Discord: https://discord.gg/m3pNNvWegX
 
 
 Versione attuale:
-OTTIMIZZATORE DI WINDOWS v.3.6.01 (Beta1)  "WINDOWS-OPTIMIZER v.3.5.01 (Beta1)"
+OTTIMIZZATORE DI WINDOWS v.3.7.01 (Beta1)  "WINDOWS-OPTIMIZER v.3.7.01 (Beta1)"
 Ecco il link diretto (RAR):
 https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
 Ecco il link diretto (SENZA RAR)
@@ -205,8 +205,19 @@ Nuovi aggiornamenti in arrivo..
 ***** Cosa c'è di nuovo? ***** 
 Tutte le modifiche importanti riassunte: 
 
+Changelog: (Registro delle modifiche)
+v.3.7.01 (Beta1) (Versione corrente!)
+* HDR Deep Color tramite HDMI/Displayport viene attivato automaticamente per impostazione predefinita se l'hardware supporta HDR.
+* Lo spazio colore HDMI/Displayport è stato ampliato dallo standard 16-235 a 0-255.
+* Miglioramento del rilevamento dei dispositivi tramite HDMI/Displayport.
+* Sebbene i file system più recenti (ad esempio NTFS) supportino percorsi e nomi di cartelle più lunghi, il sistema imposta automaticamente un limite massimo di 260 caratteri. Questo limite viene revocato a determinate condizioni. Ciò significa che è possibile utilizzare anche nomi di percorsi e cartelle più lunghi.
+* D'ora in poi, la directory di download per Windows e gli aggiornamenti dello store verranno completamente cancellati da file di installazione obsoleti o non eseguibili o rimuovere in modo sicuro i file di registro difettosi e/o correggere gli aggiornamenti 'sospesi'.
+* Piccole modifiche al codice del programma che migliorano a vantaggio le prestazioni e la stabilità. 
+* Vari valori all'interno del registro, impostati da altri "strumenti di ottimizzazione", vengono ripristinati come sempre,su valori standard sicuri. L'elenco è lungo anche qui.
+* Un po 'di 'pulizia del codice'. 
+
 Changelog: (registro delle modifiche)
-v.3.6.01 (Beta1) (Versione corrente!)
+v.3.6.01 (Beta1) 
 * Windows-Optimizer-Project Discord: https://discord.gg/m3pNNvWegX
 * Nuova funzionalità: i programmi obsoleti installati in Windows possono ora essere aggiornati direttamente tramite WINDOWS OPTIMIZER (opzionale per w10/11, sperimentale).
 * L'allocazione automatica della cache di CPU e RAM dei thread del pool di thread è configurata dinamicamente per migliorare le prestazioni e la scalabilità sull'hardware NUMA.

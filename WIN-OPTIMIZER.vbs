@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.6.01 (Beta1) " 
+revision = "v.3.7.01 (Beta1) " 
 version = title & revision 
  
 

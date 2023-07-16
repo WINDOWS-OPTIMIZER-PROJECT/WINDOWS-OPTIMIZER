@@ -1,7 +1,12 @@
-#author:gorillagriller
-#md5 generation of file content
-#status alpha
-#runtime posible: no
+
+/* codesign make this parambane
+
+*/
+
+/* #author:gorillagriller*/
+/* #md5 generation of file content*/
+/* #status alpha*/
+/* #runtime posible: no*/
 @"
 using System;
 using System.IO;

@@ -1,7 +1,7 @@
 
 Rem >> CurrentVersion << 
 title = "!c3 W11 Unsupported Update Patch "
-revision = "v.1.1 (Beta1) " 
+revision = "v.1.2 (Beta1) " 
 version = title & revision
  
 Rem >> Get Rights <<
@@ -36,14 +36,33 @@ Err.Clear
 On Error Resume Next 
 DARKSIDE = MsgBox ("Do You want to Disable Upgrades With Unsupported TPM Or CPU ?", vbSystemModal + vbOKCancel, Version) 
 If DARKSIDE <> vbOK then AbortMessage: WScript.quit 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility", 0, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck"
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility"
+Err.Clear 
+On Error Resume Next 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 1, "REG_DWORD" 
 Err.Clear 
 On Error Resume Next  
@@ -73,6 +92,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootChe
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 0, "REG_DWORD" 
 Err.Clear 
 On Error Resume Next  
@@ -105,7 +125,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

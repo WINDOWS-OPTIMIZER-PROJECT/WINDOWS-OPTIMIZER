@@ -641,7 +641,7 @@ If Speicher = false then Page = 1024
 If Speicher = 0 then Page = 1024 
 If Speicher < 1024 then Page = 1024 
 Swap = Page+(Page/2) 
-If Swap < 4096 then Swap = 4096 
+If Swap < 6144 then Swap = 6144 
 If Swap > 24576 then Swap = 24576 
 
 Err.Clear 

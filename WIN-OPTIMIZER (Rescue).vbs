@@ -1040,6 +1040,9 @@ Err.Clear
 On Error Resume Next 
 
 Rem >> Bootvorgang und Prefetchoptimierungen (Bootperformance und Programmstarts werden verbessert) << 
+Err.Clear
+On Error Resume Next 
+WshShell.Run "fsutil resource setAutoReset true c:\", 1, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "sc config ""SysMain"" start=auto & sc start ""SysMain""", 1, True 

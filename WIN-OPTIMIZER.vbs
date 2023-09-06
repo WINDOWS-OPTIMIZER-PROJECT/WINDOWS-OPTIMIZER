@@ -801,6 +801,7 @@ strKeyPath = "SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys 
 For Each subkey In arrSubKeys 
 If regex.Test(subkey) Then 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "Acceleration.Level", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DisableDynamicPstate", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableULPS", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableCoreSlowdown", 1 
@@ -812,8 +813,8 @@ oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerLev
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerLevelAC", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDefault", 2 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDefaultAC", 1 
-oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForDP", 400 
-oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForHDMI", 400 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForDP", 0 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForHDMI", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DeepColorHDMIDisable", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableRGBFullRange", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "SetDefaultFullRGBRangeOnHDMI", 1 

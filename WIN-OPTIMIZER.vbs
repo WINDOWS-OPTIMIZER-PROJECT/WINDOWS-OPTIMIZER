@@ -2140,10 +2140,10 @@ On Error Resume Next
 WshShell.Run "cmd.exe /c net start wuauserv & net start bits", 3, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "winget source reset --force", 1, True 
+If WinValue = "10." then WshShell.Run "winget source reset --force", 1, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "winget source update", 1, True 
+If WinValue = "10." then WshShell.Run "winget source update", 1, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "WSReset.exe -i", 1, True 

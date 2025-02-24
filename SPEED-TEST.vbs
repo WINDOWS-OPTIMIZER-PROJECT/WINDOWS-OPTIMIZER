@@ -1,12 +1,12 @@
  
 Rem 	************************************************* 
-Rem 	* !c3 SPEED-TEST 				* 
+Rem 	* W-O-P SPEED-TEST 				* 
 Rem 	* Dieses Tool testet die Leistung des Computers * 
 Rem	************************************************* 
  
 Rem >> CurrentVersion << 
-title = "!c3 SPEED-TEST "
-revision = "v.1.4.01 (Beta1) "
+title = "W-O-P SPEED-TEST "
+revision = "v.1.4.02 (Beta1) "
 version = title & revision
  
 Rem >> Get Rights <<
@@ -171,7 +171,7 @@ next
 Err.Clear 
 On Error Resume Next 
 start = Timer 
-objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command winsat formal -v -restart clean"), 3, True 
+objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command cmd.exe /c del /F /S /Q %WINDIR%\performance\winsat\datastore; winsat formal -v -restart clean"), 3, True 
 ende = Timer
 Err.Clear 
 On Error Resume Next 
@@ -246,7 +246,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
+rem 	* W-O-P WINDOWS-OPTIMIZER-PROJECT 				  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

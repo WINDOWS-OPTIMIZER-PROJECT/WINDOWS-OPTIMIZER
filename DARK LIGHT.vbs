@@ -1,6 +1,6 @@
 
 Rem >> CurrentVersion << 
-title = "!c3 THE DARK LIGHT "
+title = "W-O-P THE DARK LIGHT "
 revision = "v.1.1 (Beta1) " 
 version = title & revision
  
@@ -75,7 +75,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* !c3 WINDOWS-OPTIMIZER 					  * 
+rem 	* W-O-P WINDOWS-OPTIMIZER-PROJECT 				  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

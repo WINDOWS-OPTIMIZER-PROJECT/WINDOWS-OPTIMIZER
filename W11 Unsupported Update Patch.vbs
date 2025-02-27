@@ -1,6 +1,6 @@
 
 Rem >> CurrentVersion << 
-title = "!c3 W11 Unsupported Update Patch "
+title = "W-O-P W11 Unsupported Update Patch "
 revision = "v.1.2 (Beta1) " 
 version = title & revision
  
@@ -125,7 +125,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
+rem 	* W-O-P WINDOWS-OPTIMIZER-PROJECT 				  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

@@ -419,16 +419,17 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\StateV
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\AllowAutoWindowsUpdateDownloadOverMeteredNetwork", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ExcludeWUDriversInQualityUpdate", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\RestartNotificationsAllowed2", 1,"REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 0, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 0, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 0, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\HideUnsupportedHardwareNotifications", 1, "REG_DWORD" 
 
 Rem >> WinXP-POS-Ready-Embedded << 
 Err.Clear 
@@ -1038,7 +1039,7 @@ Rem >> Windows-Systemwiederherstellung <<
 Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\SystemRestorePointCreationFrequency", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\cfg\DiskPercent", 15, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\cfg\DiskPercent", 20, "REG_DWORD" 
 Err.Clear 
  
 Rem >> Windows-Cortana-Optimierungen << 

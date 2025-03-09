@@ -41,29 +41,13 @@ On Error Resume Next
 WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU"
 Err.Clear 
 On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck"
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck"
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck"
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck"
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck"
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck"
+WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\"  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.RegDelete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility"
 Err.Clear 
 On Error Resume Next 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 1, "REG_DWORD" 
+WshShell.run "Reg Delete " & "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\"  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next  
 WshShell.Run "gpupdate /force", 1, True 

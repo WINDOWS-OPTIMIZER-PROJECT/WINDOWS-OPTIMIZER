@@ -403,7 +403,7 @@ Err.Clear
 
 Rem >> Windows-Update << 
 On Error Resume Next 
-WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
+WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & net stop defragsvc & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
 Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching\DriverUpdateWizardWuSearchEnabled", 1,"REG_DWORD" 
@@ -413,12 +413,41 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\A
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching\SearchOrderConfig", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate\AutoDownload", 4,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971F918-A847-4430-9279-4A52D1EFE18D\RegisteredWithAU", 1,"REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Test\Scan\ForceUnsupportedCPU", 1,"REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Test\Scan\ForceUnsupportedCPU"
+Err.Clear 
+On Error Resume Next 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Test\Scan\ForceUnsupportedCPU", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance\MaintenanceDisabled", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\StateVariables\AlwaysAllowMeteredNetwork", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\AllowAutoWindowsUpdateDownloadOverMeteredNetwork", 0,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\AllowMUUpdateService", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ExcludeWUDriversInQualityUpdate", 0,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\IsContinuousInnovationOptedIn", 1,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\IsExpedited", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\RestartNotificationsAllowed2", 1,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config\DODownloadMode", 0,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config\DownloadMode_BackCompat", 0,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings\DownloadMode", 0,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings\DownloadModeProvider", 8,"REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU"
+Err.Clear 
+On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility"
+Err.Clear 
+On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\HideUnsupportedHardwareNotifications"
+Err.Clear 
+On Error Resume Next 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck", 1, "REG_DWORD" 

@@ -12,7 +12,7 @@
  ***** THE WINDOWS-OPTIMIZER-PROJECT *****
 >> WINDOWS-OPTIMIZER (Beta) << 
 Jetzt für alle Windows-Versionen geeignet!! 
-Dieses Tool nimmt verschiedene Anpassungen an Windows vor - Benutzung auf eigene Gefahr!!
+Dieses Tool nimmt verschiedene Anpassungen an Windows vor - Verwendung auf eigene Gefahr!!
 
 
 WINDOWS-OPTIMIZER-PROJECT auf GitHub: 
@@ -25,7 +25,7 @@ Discord: https://discord.gg/m3pNNvWegX
 
 
 Aktuelle Version: 
-WINDOWS-OPTIMIZER v.3.7.01 (Beta1)
+WINDOWS-OPTIMIZER v.3.8.01 (Beta1)
 Hier der Direktlink (RAR): 
 https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
 Hier der Direktlink (OHNE RAR)
@@ -132,7 +132,50 @@ New Updates coming soon..
 Alle wichtigen Änderungen zusammengefasst: 
 
 Changelog: 
-v.3.7.01 (Beta1) (Aktuelles Release!) 
+v.3.8.01 (Beta1) (Aktuelles Release!) 
+* Erweiterter Kernel-Patch sorgt systemweit für mehr Durchsatz und bessere Reaktionszeiten. 
+* Die Erweiterungen "RESCUE-OPTION" aus den Windows-Optimizer-Rescue-Script wurde erweitert und in den WINDOWS-OPTIMIZER optional integriert. Durch eine aktivierte RESCUE-OPTION werden alle Systemdateien überprüft, fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurückgesetzt. Im Anschluss wird noch eine vollständige Defender-Offline-Virenprüfung gestartet. Nach dem Neustart wird der Datei-Index vollständig neu erstellt, was mehrere Minuten dauern kann. 
+* Die Erweiterungen die der Windowsoberfläche und dem Systemmenu hinzugefügt werden sind ab sofort optional und können durcht das Script aktiviert bzw. deaktiviert werden. 
+* Die optionale Erweiterung des Desktop-Kontextmenus wird um den neuen Menupunkt "Alle Programme" erweitert - Von hier aus können alle installierten Programme zentral gestartet oder per Rechtsclick ans Startmenu oder die Taskleiste angeheftet, Verknüpfungen erstellt oder bequem deinstalliert oder das Installationsverzeichnis geöffnet werden. 
+* Die Erweiterungen bei der alle Anfragen über alle bekannten Netzwerkverbindungen über die offiziellen CLOUDFLARE-DNS-SERVER umgeleitet werden sind ab sofort optional. 
+* Die optionale Erweiterung der DirectX-Laufzeitkomponenten wird um DirectPlay über DirectX erweitert. 
+* Das optionale Feature veraltete, in Windows installierte Programme direkt über den WINDOWS-OPTIMIZER (WinGet) zu aktualisieren wurde überarbeitet und weiter verbessert. 
+* Der Windows-11-Unsupported-Update-Hack flog raus. Wer diesen Hack weiter nutzen möchte findet dazu ein separates Script "W11 Unsupported Update Patch" im Archiv und auf unserer offiziellen GitHub-Projekt-Seite, dass diesen Hack wie ein Lichtschalter an-/ausschalten kann. 
+* Windows-Update wird sinnvoll konfiguriert. 
+* Der Energiesparplan "Ultimative-Leistung", der durch das Script erstellt und dann als "Rocket-Boost" konfiguriert und aktiviert wird bekam nochmal ein kleines Feintuning um die Performance nochmal etwas zu verbessern.  
+* Die Performance und Reaktionszeiten sämtlicher Hostprozesse die den Datendurchsatz auf Programme, Treiber und Hardware steuern wurde verbessert. 
+* Die Performance und Reaktionszeiten der Explorer.exe beim Zugriff auf Datenträger wird verbessert, Ladezeiten werden deutlich verkürzt. 
+* Die Performance und der Datendurchsatz aller verbauten LAN-Karten wird verbessert - Input-/Outputbuffer werden sinnvoll an die verbaute Hardware angepasst und erweitert. 
+* Der Datendurchsatz von Vordergrundprozessen wird verbessert. 
+* Microsoft.VCRedist.2015+.x86 und Microsoft.VCRedist.2015+.x64 werden automatisch installiert, fehlende Laufzeitkomponenten werden hinzugefügt und veraltete Laufzeitkomponenten werden aktuallisiert. 
+* Das .NetFramework3.x wird automatisch installiert, fehlende Laufzeitkomponenten werden hinzugefügt und veraltete Laufzeitkomponenten werden aktuallisiert. 
+* Die Performance von DirectX wird verbessert, DirectX Auto-HDR und zusätzliche Menüpunkte werden je nach Hardware auch auf offiziell nicht unterstützter Hardware freigeschaltet und aktiviert. 
+* Die Performance von Direct3D wird durch das Zulassen und Aktivieren einer kompatibelen verbauten GPU deutlich verbessert.  
+* Auf vielfachen Wunsch: AMD hat euch diese Option in der aktuellen Treibergeneration genommen - wir geben sie euch zurück: Ab sofort 1 Pre-Rendered-Picture-Ahead anstatt den standartmäßigen 3 bringt deutlich spürbar kürzere Latenzen beim 3D-Gaming für alle AMD-Grafikkarten, die das Feature unterstützen. ;) 
+* Windows 64-BIT nutzt ab sofort automatisch standartmäßig die 64-BIT-Version des Windows-Media-Players. ;)
+* Die Prozessverwaltung für Hintergrund- und Netzwerkprozesse in Windows wird optimiert. 
+* Die Performance und Reaktionszeiten der gesamten Windowsoberfläche wird verbessert.
+* Die Performance für 3D-Anwendungen unter V-Sync wird verbessert. 
+* Die Performance und Stabilität der Windowsoberfläche wird verbessert. 
+* Die Performance und Stabilität der Netzwerkadapter wird verbessert. 
+* Die Performance der GameBar wird verbessert - ein paar Grundeinstellungen werden vorkonfiguriert. 
+* Die Performance des windowseigenen Datenträgerpartitionierungstools (Diskpart.exe) wird verbessert.
+* Die Performance der windowseigenen Abbildverwaltung für die Bereitstellung (Dism.exe/DismHost.exe) wird verbessert. 
+* Die Performance des windowseigenen Systemdatei-Überprüfungsprogramms zur Problembehandlung bei fehlenden oder beschädigten Systemdateien (sfc.exe) wird verbessert. 
+* Die Performance der windowseigenen Dateisystemprüfung für lokale Datenträger (chkdsk.exe) wird verbessert. 
+* Die Performance von WinGet wurde verbessert. 
+* Die Performance der Windows-Anmeldung wurde verbessert. 
+* Die Performance und das Startverhalten für Remote-Desktops und virtuelle Desktops wird verbessert. 
+* Reduzierter Datenverkehr direkt nach der Benutzeranmeldung verkürzt den Systemstart - Der OneDrive-Synchronisierungsclient ("OneDrive.exe") generiert ab sofort erst nach der Anmeldung Netzwerkdatenverkehr.  
+* Der Festplattenspeicherbereich für Systemwiederherstellungspunkte wird standartmäßig auf 10% und unter bestimmten Voraussetzungen auf maximal mögliche 20% des Datenträgers erweitert. 
+* Intelligenter Zeilenumbruch soll die Lesbarkeit aller Benachrichtigungen des Scripts bei verschiedenen Auflösungen und Schriftgrößen verbessern.  
+* Verbesserung des Raum-Zeit-Kontinuums - Raum und Zeit verlaufen ab sofort asynchron. 
+* Kleinere Anpassungen des Programmcodes, die der Performance und der Stabilität zugute kommen. 
+* Verschiedene Werte innerhalb der Registry, die durch andere "Tuning-Tools" gesetzt werden, werden wie immer wieder auf sichere Werte zurück gesetzt - Die Liste ist hier wieder lang. 
+* Etwas "Code-Cleanup". 
+
+Changelog: 
+v.3.7.01 (Beta1) 
 * HDR-Deep-Color über HDMI/Displayport wird falls die Hardware HDR unterstützt standartmäßig automatisch aktiviert.  
 * Der HDMI/Displayport-Farbraum wird von den Standartmäßigen 16-235 auf 0-255 erweitert. 
 * Die Erkennung von Geräten über HDMI/Displayport wird verbessert. 

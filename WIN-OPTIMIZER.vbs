@@ -1,13 +1,13 @@
  
 Rem 	***************************************************************** 
-Rem 	* !c3 WIN-OPTIMIZER 					       	* 
+Rem 	* W-O-P WINDOWS-OPTIMIZER-PROJECT 			       	* 
 Rem 	* Beschleunigt Windows durch Änderungen innerhalb der Registry 	* 
-Rem 	* dauerhaft 							*
+Rem 	* dauerhaft!! 							*
 Rem	***************************************************************** 
  
 Rem >> CurrentVersion << 
-title = "!c3 WINDOWS-OPTIMIZER " 
-revision = "v.3.7.01 (Beta1) " 
+title = "W-O-P WINDOWS-OPTIMIZER-PROJECT " 
+revision = "v.3.8.01 (Beta1) "
 version = title & revision 
  
 
@@ -135,10 +135,10 @@ Sub SpeicherUser ()
 Err.Clear 
 On Error Resume Next  
 if Language = "deutsch" then speicher = Inputbox ("Die Größe des Arbeitsspeichers läßt sich nicht korrekt auslesen!!! " & vbNewLine _ 
-& vbNewLine & "Wie viele MB Arbeitsspeicher besitzt dieses System? ", Version, "1024") 
+& vbNewLine & "Wie viele MB physikalischen Arbeitsspeicher besitzt dieses System? ", Version, "1024") 
 
 if Language = "english" then speicher = Inputbox ("The size of the Random-Access Memory can not be read correctly !!! " & vbNewLine _ 
-& vbNewLine & "How many MB of Memory does this system have? ", Version, "1024") 
+& vbNewLine & "How many MB of physical Memory does this system have? ", Version, "1024") 
 
 If Speicher = "" then AbortMessage: WScript.quit 
 If Speicher = 0 then SpeicherUser 
@@ -150,23 +150,17 @@ Err.Clear
 On Error Resume Next 
 If Language = "deutsch" then Optimize = MsgBox (winversioncheck &" wurde erfolgreich erkannt. " _ 
 & vbNewLine & Speicher &" MB RAM wurden für Windows reserviert. " & vbNewLine _ 
-& vbNewLine & winversioncheck &" ist Standardmäßig nicht optimal auf " _ 
-& vbNewLine & "Performance, max. Systemstabilität und Systemsicherheit " _ 
-& vbNewLine & "abgestimmt... " & vbNewLine _ 
-& vbNewLine & "Dieses Tool ändert das durch Anpassungen an die verbaute Hardware " _ 
-& vbNewLine & "innerhalb der Registry dauerhaft - Benutzung auf eigene Gefahr !!! " & vbNewLine _ 
-& vbNewLine & "Dieser Vorgang kann ein paar Minuten dauern. " & vbNewLine _ 
+& vbNewLine & winversioncheck &" ist Standardmäßig nicht optimal auf Performance, max. Systemstabilität und Systemsicherheit abgestimmt... " & vbNewLine _ 
+& vbNewLine & "Dieses Tool ändert das durch Anpassungen an die verbaute Hardware innerhalb der Registry dauerhaft - Verwendung auf eigene Gefahr !!! " & vbNewLine _ 
+& vbNewLine & "Dieser Vorgang kann einige Minuten dauern... " & vbNewLine _ 
 & vbNewLine & winversioncheck &" jetzt optimieren? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 
 If Language = "english" then Optimize = MsgBox (winversioncheck &" was successfully recognized. " _ 
 & vbNewLine & Speicher &" MB RAM were reserved for Windows. " & vbNewLine _ 
-& vbNewLine & winversioncheck &" is not optimal configured for " _ 
-& vbNewLine & "Performance, max. System-Stability and System-Security " _ 
-& vbNewLine & "by default... " & vbNewLine _ 
-& vbNewLine & "This Tool changes this by adapting to the installed Hardware " _ 
-& vbNewLine & "within the Registry permanently - Use at your own risk !!! " & vbNewLine _ 
-& vbNewLine & "This Process can take a few minutes. " & vbNewLine _ 
+& vbNewLine & winversioncheck &" is not optimal configured for max. Performance, max. System-Stability and System-Security by default... " & vbNewLine _ 
+& vbNewLine & "This Tool changes this by adapting to the installed Hardware within the Registry permanently - Use at your own risk !!! " & vbNewLine _ 
+& vbNewLine & "This Process can take a few minutes... " & vbNewLine _ 
 & vbNewLine & "Optimize " & winversioncheck &" now? ", _ 
 vbSystemModal + vbOKCancel, Version) 
 
@@ -179,50 +173,49 @@ Err.Clear
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\SystemRestorePointCreationFrequency", 0, "REG_DWORD" 
 Err.Clear 
+
+On Error Resume Next 
+WshShell.Run "cmd.exe /c wmic /namespace:\\root\default path SystemRestore call Enable C:\ && vssadmin resize shadowstorage /for=c: /on=c: /maxsize=10%", 1, true 
+Err.Clear 
+
 On Error Resume Next 
 strComputer = "."
 Set sr = getobject("winmgmts:\\.\root\default:Systemrestore") 
 If (sr.createrestorepoint("reset "& Version, 0, 100)) = 0 Then Restorepoint = "1"
-
+ 
 If Restorepoint <> "1" and Language = "deutsch" Then _ 
-noSysRestorepoint = MsgBox ("Es konnte kein System-Wiederherstellungspunkt " _ 
-& vbNewLine & "erstellt werden. " & vbNewLine _ 
-& vbNewLine & winversioncheck & " trotzdem jetzt optimieren? ", vbSystemModal+vbExclamation+vbOKCancel, Version) 
-If noSysRestorepoint = vbCancel then AbortMessage: WScript.quit 
+noSysRestorepoint = MsgBox ("Es konnte KEIN SYSTEM-WIEDERHERSTELLUNGSPUNKT erstellt werden! " & vbNewLine _ 
+& vbNewLine & winversioncheck & " trotzdem jetzt optimieren? ", vbSystemModal+vbExclamation+vbAbortRetryIgnore, Version) 
 
 If Restorepoint <> "1" and Language = "english" Then _ 
-noSysRestorepoint = MsgBox ("No System-Restore-Point could be created " & vbNewLine _ 
-& vbNewLine & "still optimize " & winversioncheck & " now? ", vbSystemModal+vbExclamation+vbOKCancel, Version) 
-If noSysRestorepoint = vbCancel then AbortMessage: WScript.quit 
+noSysRestorepoint = MsgBox ("NO SYSTEM-RESTORE-POINT could be created! " & vbNewLine _ 
+& vbNewLine & "Do you still want to optimize " & winversioncheck & " now? ", vbSystemModal+vbExclamation+vbAbortRetryIgnore, Version) 
+
+If noSysRestorepoint = vbAbort then AbortMessage: WScript.quit 
+If noSysRestorepoint = vbRetry then SystemRestore 
  
 If Restorepoint = "1" and Language = "deutsch" Then _ 
-MsgBox "Für den Fall, daß durch den " & title _ 
-& vbNewLine & "Probleme entstehen, wurde zur Sicherheit " _ 
-& vbNewLine & "vorab ein System-Wiederherstellungspunkt " _ 
-& vbNewLine & "erstellt. " & vbNewLine _ 
+MsgBox "Für den Fall, daß durch dieses Tool Probleme entstehen, wurde zur Sicherheit vorab ein SYSTEM-WIEDERHERSTELLUNGSPUNKT erstellt. " & vbNewLine _ 
 & vbNewLine & "Aufgelistet als: "& vbTab & "reset "& Version _ 
 & vbNewLine & "Zeitpunkt: " & vbTab & Date & " - " & Time ,vbSystemModal, Version 
  
 If Restorepoint = "1" and Language = "english" Then _ 
-MsgBox "A System-Restore-Point was created by " _
-& vbNewLine &  title & " for safety reasons. " & vbNewLine _ 
+MsgBox "A SYSTEM-RESTORE-POINT was created by this Tool for safety reasons. " & vbNewLine _ 
 & vbNewLine & "Listet as: "& vbTab & "reset "& Version _ 
 & vbNewLine & "Time: " & vbTab & Date & " - " & Time ,vbSystemModal, Version 
 end sub
 
-If Language = "deutsch" then SystemRestorepoint = MsgBox ("Möchten Sie für den Fall, daß " _ 
-& vbNewLine & "durch den " & title & " Probleme entstehen " _ 
-& vbNewLine & "zur Sicherheit vorab einen " & vbNewLine _ 
-& vbNewLine & "System-Wiederherstellungspunkt erstellen? ", _ 
-vbSystemModal + vbYesNo, Version) 
+If Language = "deutsch" then SystemRestorepoint = MsgBox ("Möchten Sie für den Fall, daß durch dieses Tool Probleme entstehen zur Sicherheit vorab einen SYSTEM-WIEDERHERSTELLUNGSPUNKT erstellen? " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 
-If Language = "english" then SystemRestorepoint = MsgBox ("Do You want to create a System-Restore-Point " _ 
-& vbNewLine & "for safety reasons first? ", _ 
-vbSystemModal + vbYesNo, Version) 
+If Language = "english" then SystemRestorepoint = MsgBox ("Do You want to create a SYSTEM-RESTORE-POINT for safety reasons first? " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 
 If SystemRestorepoint = vbYes then SystemRestore  
  
-Rem >> !c3-NVIDIA-CoolBits 2.0 / NVTweak (Schaltet alle versteckte Optionen von NVIDIA Grafikkartentreibern frei) << 
+Rem >> W-O-P NVIDIA-CoolBits 2.0 / NVTweak (Schaltet alle versteckte Optionen von NVIDIA Grafikkartentreibern frei) << 
 sub CoolBits () 
 Err.Clear 
 On Error Resume Next 
@@ -334,6 +327,11 @@ End If
 End If 
  
 Rem >> Defrag.exe << 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "cmd.exe /c net start defragsvc", 1, true 
+Err.Clear 
+On Error Resume Next 
 WshShell.Run "dfrgui.exe", 1, false 
 Err.Clear 
 On Error Resume Next  
@@ -352,33 +350,45 @@ next
 Err.Clear 
 End Sub 
  
+Rem >> System-Menu+ <<   
+Err.Clear 
+On Error Resume next 
+If Language = "deutsch" then SMPlus = MsgBox ("Sollen zusätzlich an die Anpassung durch dieses Tool weitere optionale SYSTEM-MENU-ERWEITERUNGEN aktiviert werden? " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+
+If Language = "english" then SMPlus = MsgBox ("Should optional SYSTEM-MENU-EXTENSIONS be activated in addition to the adaptation through this Tool? " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+
+REM SMPlus = "Delete REM and Do Nothing" 
+ 
+Rem >> Cloudflare-DNS <<   
+Err.Clear 
+On Error Resume next 
+If Language = "deutsch" then DNSPlus = MsgBox ("Sollen zusätzlich an die Anpassung durch dieses Tool alle Anfragen über alle bekannten Netzwerkverbindungen über die offiziellen CLOUDFLARE-DNS-SERVER umgeleitet werden? " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+
+If Language = "english" then DNSlus = MsgBox ("Should all Requests across all known Network-Connections be redirected through the official CLOUDFLARE-DNS-SERVERS? " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+
 Rem >> Get Datas <<   
+Err.Clear 
 On Error Resume next 
 strComputer = "." 
 Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
 Set colDisks = objWMIService.ExecQuery ("Select * from Win32_LogicalDisk Where DriveType = 3")
 For Each objDisk in colDisks
 If Language = "deutsch" then HD1 = HD1 & vbNewLine & objDisk.DeviceID & vbTab & "FileSystem: " & objDisk.FileSystem & vbNewLine _  
-& vbTab & "Exakte physikalische Größe (GB): " & Int(objDisk.Size)/1024/1024/1024 & vbNewLine _ 
-& vbTab & "Exakter freier Speicherplatz (GB): " & int(objDisk.FreeSpace)/1024/1024/1024 & vbNewLine 
+& vbTab & "Physikalische Größe (GB): " & Round(Int(objDisk.Size)/1024/1024/1024,1) & vbNewLine _ 
+& vbTab & "Freier Speicherplatz (GB): " & Round(int(objDisk.FreeSpace)/1024/1024/1024,1) & vbNewLine 
 
 If Language = "english" then HD1 = HD1 & vbNewLine & objDisk.DeviceID & vbTab & "FileSystem: " & objDisk.FileSystem & vbNewLine _  
-& vbTab & "Exact physical Size (GB): " & Int(objDisk.Size)/1024/1024/1024 & vbNewLine _ 
-& vbTab & "Exact free Size (GB): " & int(objDisk.FreeSpace)/1024/1024/1024 & vbNewLine 
-Next
-
-If Language = "deutsch" then HD = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
-& vbNewLine & "durch den " & title & " noch alle Festplatten " _ 
-& vbNewLine & "optimieren? " & vbNewLine & vbNewLine & HD1 & vbNewLine _ 
-& vbNewLine & "Dieser Vorgang kann ein paar Minuten bis mehrere Stunden dauern. ", _ 
-vbSystemModal + vbYesNo, Version) 
-If HD = vbYes then HDOptimizer = "yes"  
-
-If Language = "english" then HD = MsgBox ("Do you want to optimize all Harddrives after " _ 
-& vbNewLine & "optimizing by " & title & " ? " & vbNewLine & vbNewLine & HD1 & vbNewLine _ 
-& vbNewLine & "This Process can take a few minutes to several hours. ", _ 
-vbSystemModal + vbYesNo, Version) 
-If HD = vbYes then HDOptimizer = "yes"  
+& vbTab & "Physical Size (GB): " & Round(Int(objDisk.Size)/1024/1024/1024,1) & vbNewLine _ 
+& vbTab & "Free Size (GB): " & Round(int(objDisk.FreeSpace)/1024/1024/1024,1) & vbNewLine 
+Next 
  
 Rem >> System-Tweaks <<
 Sub winOpt () 
@@ -386,7 +396,7 @@ Err.Clear
 On Error Resume Next 
 Rem >> Registry-Backup << 
 WshShell.Run "cmd.exe /c Systeminfo & echo off & echo "& version &" & echo optimizing - please wait....  & echo creating registry-backup: C:\REGISTRY-BACKUP.REG & REGEDIT /E /Y C:\REGISTRY-BACKUP.REG", 3, True 
-Err.Clear 
+Err.Clear
 On Error Resume Next 
 Rem >> Alle Explorer.exe beenden << 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoRestartShell", 0, "REG_DWORD" 
@@ -471,26 +481,17 @@ Err.Clear
 On Error Resume Next 
 ende = Timer 
 if XPEmbedded = "Microsoft Windows XP" and PosReady <> "1" and Language = "deutsch" then _
-XPEmbedded = MsgBox ("Der Support für " & winversioncheck & " wurde am 8. April 2014 " _ 
-& vbNewLine & "Seitens Microsoft eingestellt. " & vbNewLine _ 
-& vbNewLine & "Dieses Tool bietet die Möglichkeit über einen Hack " _ 
-& vbNewLine & "dem Microsoft-Updateserver vorzugaukeln, daß diese " _ 
-& vbNewLine & "Windowsversion eine sog. POS-Ready-Embedded-Version ist, " _ 
-& vbNewLine & "was den Server dazu veranlaßt weiterhin neue " _
-& vbNewLine & "Sicherheits-Updates zur Verfügung zu stellen. " & vbNewLine _ 
-& vbNewLine & "Soll der Hack ´POS-Ready-Embedded´ jetzt aktiviert werden? ", _ 
-vbSystemModal + vbOKCancel, Version) 
+XPEmbedded = MsgBox ("Der Support für " & winversioncheck & " wurde am 8. April 2014 Seitens Microsoft eingestellt. " & vbNewLine _ 
+& vbNewLine & "Dieses Tool bietet die Möglichkeit über einen Hack dem Microsoft-Updateserver vorzugaukeln, daß diese Windowsversion eine sog. POS-Ready-Embedded-Version ist, was den Server dazu veranlaßt weiterhin neue Sicherheits-Updates zur Verfügung zu stellen. " & vbNewLine _ 
+& vbNewLine & "Soll der Hack ´POS-READY-EMBEDDED´ jetzt aktiviert werden? " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbOKCancel + vbDefaultButton1, Version) 
 
 if XPEmbedded = "Microsoft Windows XP" and PosReady <> "1" and Language = "english" then _
-XPEmbedded = MsgBox ("The Support for " & winversioncheck & " has been discontinued on April 8th 2014 " _ 
-& vbNewLine & "from Microsoft. " & vbNewLine _ 
-& vbNewLine & "This Tool offers the possibility " _ 
-& vbNewLine & "to use a hack to fool the Microsoft Update-Server " _ 
-& vbNewLine & "that this Version of Windows is a so-called POS Ready Embedded Version " _ 
-& vbNewLine & "which causes the server to continue to provide new Security Updates " _
-& vbNewLine & "for this Window-Version. " & vbNewLine _ 
-& vbNewLine & "Do you want to activate the ´POS-Ready-Embedded´ Hack now? ", _ 
-vbSystemModal + vbOKCancel, Version) 
+XPEmbedded = MsgBox ("The Support for " & winversioncheck & " has been discontinued on April 8th 2014 from Microsoft. This Tool offers the possibility to use a Hack to fool the Microsoft Update-Server that this Version of Windows is a so-called POS Ready Embedded Version which causes the server to continue to provide new Security Updates for this Window-Version. " & vbNewLine _ 
+& vbNewLine & "Do you want to activate the ´POS-READY-EMBEDDED´ Hack now? " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbOKCancel + vbDefaultButton1, Version) 
 restart = Timer 
 If XPEmbedded = vbOK then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\WPA\PosReady\Installed", 1,"REG_DWORD" 
 
@@ -510,6 +511,12 @@ WshShell.Run "powercfg /change monitor-timeout-dc 12", 1, True
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "powercfg /change monitor-timeout-ac 0", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "powercfg /change standby-timeout-dc 15", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "powercfg /change standby-timeout-ac 0", 1, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c", 1, True 
@@ -590,6 +597,9 @@ On Error Resume Next
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor CPINCREASETIME 1", 1, True 
 Err.Clear 
 On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor CPINCREASETIME 1", 1, True 
+Err.Clear 
+On Error Resume Next 
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor PERFBOOSTMODE 2", 1, True 
 Err.Clear 
 On Error Resume Next 
@@ -602,6 +612,12 @@ On Error Resume Next
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor PERFINCTIME1 1", 1, True 
 Err.Clear 
 On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor PERFINCTIME 1", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor PERFINCTIME1 1", 1, True 
+Err.Clear 
+On Error Resume Next 
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor PERFINCPOL 2", 1, True 
 Err.Clear 
 On Error Resume Next 
@@ -612,6 +628,12 @@ If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current 
 Err.Clear 
 On Error Resume Next 
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor PERFDECPOL1 1", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor LATENCYHINTPERF 100", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor LATENCYHINTPERF1 100", 1, True 
 Err.Clear 
 On Error Resume Next 
 If WinValue = "10." then WshShell.Run "powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFEPP 0", 1, True 
@@ -644,6 +666,18 @@ On Error Resume Next
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor PERFDECTHRESHOLD1 8", 1, True 
 Err.Clear 
 On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor HETEROCLASS1INITIALPERF 100", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor HETEROCLASS1INITIALPERF 100", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor HETEROINCREASETIME 1", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor HETEROINCREASETIME 1", 1, True 
+Err.Clear 
+On Error Resume Next 
 If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor DISTRIBUTEUTIL 0", 1, True 
 Err.Clear 
 On Error Resume Next 
@@ -651,6 +685,30 @@ If WinValue = "10." then WshShell.Run "Powercfg /setacvalueindex scheme_current 
 Err.Clear 
 On Error Resume Next 
 If WinValue = "10." then WshShell.Run "Powercfg /setdcvalueindex scheme_current SUB_VIDEO aded5e82-b909-4619-9949-f5d71dac0bcb 100", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor schedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor schedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setacvalueindex scheme_current sub_processor shortschedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg -setdcvalueindex scheme_current sub_processor shortschedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg /setacprofileindex scheme_current profile_background schedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg /setdcprofileindex scheme_current profile_background schedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg /setacprofileindex scheme_current profile_background shortschedpolicy 2", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Powercfg /setdcprofileindex scheme_current profile_background shortschedpolicy 2", 1, True 
 Err.Clear 
 On Error Resume Next 
 If WinValue = "10." then WshShell.Run "powercfg /change monitor-timeout-dc 12", 1, True 
@@ -789,6 +847,17 @@ On Error Resume Next
 wshShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Enable-MMAgent -PageCombining -v"), 1, True 
 Err.Clear 
 On Error Resume Next 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583\ValueMax", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583\ValueMin", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318584\ValueMax", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318584\ValueMin", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableTsx", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\GlobalTimerResolutionRequests", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\IdealDpcRate", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaximumDpcQueueDepth", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MinimumDpcRate", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\SerializeTimerExpiration", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ThreadDpcEnable", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\IOPageLockLimit", IOPLL, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\DisablePagingExecutive", DPE, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettings", 0, "REG_DWORD" 
@@ -812,6 +881,8 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityC
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl\IRQ14Priority", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl\IRQ15Priority", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation", 38, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\amd3dvcache\Preferences\EffectivePowerMode\GameMode\Type", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\amd3dvcache\Preferences\EffectivePowerMode\MixedReality\Type", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\InetInfo\Parameters\DisableMemoryCache", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\InetInfo\Parameters\MemCacheSize", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\InetInfo\Parameters\ThreadPoolUseIdealCpu", 1, "REG_DWORD" 
@@ -848,6 +919,14 @@ oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetect
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DeepColorHDMIDisable", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableRGBFullRange", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "SetDefaultFullRGBRangeOnHDMI", 1 
+Err.Clear 
+On Error Resume Next
+iValues = Array(&H31,&H00) 
+oReg.SetBinaryValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey & "\UMD", "FlipQueueSize", iValues 
+oReg.SetBinaryValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey & "\UMD", "Main3D", iValues 
+oReg.SetStringValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey & "\UMD", "Main3D_DEF", 1 
+Err.Clear 
+On Error Resume Next 
 End If 
 Next 
 Err.Clear 
@@ -858,6 +937,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsD
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler\EnablePreemption", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler\VsyncIdleTimeout", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics\DisableHWAcceleration", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics\MaxMultisampleType", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics\UseReferenceRasterizer", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SvcHostSplitThresholdInKB", 4718592, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TSFairShare\Disk\EnableFairShare", 0, "REG_DWORD" 
@@ -868,6 +948,10 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VxD\BIOS
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VxD\BIOS\FastDRAM", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VxD\BIOS\PCIConcur", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Intel\GMM\DedicatedSegmentSize", VRAM, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DirectDraw\EmulationOnly", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Direct3D\Drivers\SoftwareOnly", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DirectDraw\EmulationOnly", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Direct3D\Drivers\SoftwareOnly", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Holographic\FirstRun\AllowFailedSystemChecks", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableVirtualization", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\7zFM.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -880,26 +964,44 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\chkdsk.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\chrome.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\chrome.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cleanmgr.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cleanmgr.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cleanmgr.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cmd.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cmd.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\conhost.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\conhost.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\diskpart.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\diskpart.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Dism.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Dism.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DismHost.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DismHost.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwebsetup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dllhost.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dllhost.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwebsetup.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwebsetup.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwsetup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwsetup.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dxwsetup.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\explorer.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\explorer.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefox.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefox.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefoxPortable.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\firefoxPortable.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GameBar.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GameBar.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GameBarFTServer.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\GameBarFTServer.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\gpupdate.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\gpupdate.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\iexplore.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\iexplore.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeSetup.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeSetup.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msedge.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\msiexec.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -910,6 +1012,10 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaGXPortable.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaPortable.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\OperaPortable.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\powershell.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\powershell.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\rundll32.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\rundll32.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Safari.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Safari.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\seamonkey.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -922,6 +1028,14 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Setupprep.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sfc.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sfc.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\StartMenuExperienceHost.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\StartMenuExperienceHost.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SystemSettings.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SystemSettings.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SystemSettingsBroker.exe\PerfOptions\CpuPriorityClass", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SystemSettingsBroker.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Taskmgr.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Taskmgr.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\tor.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\tor.exe\PerfOptions\IoPriority", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\vivaldi.exe\PerfOptions\CpuPriorityClass", 3, "REG_DWORD" 
@@ -964,7 +1078,7 @@ str = objShell.RegRead (KEY)
 str = regex.Replace(str,"$1=32")
 objShell.RegWrite KEY,str,"REG_EXPAND_SZ"
  
-Rem >> UDMA neu setzen, Laufwerke beschleunigen << 
+Rem >> UDMA Fehler zurücksetzen, Grundeinstellung neu setzen, Laufwerke beschleunigen << 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "diskperf -n", 1, True 
@@ -978,6 +1092,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSyste
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsEncryptPagingFile", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsMemoryUsage", 2, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\NtfsMftZoneReservation", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\RefsDisableLastAccessUpdate", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Fdc\ForceFIFO", 0, "REG_SZ" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\DiskSpaceThreshold", 5, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR\TelemetryPerformanceEnabled", 0, "REG_DWORD" 
@@ -991,7 +1106,10 @@ On Error Resume Next
 WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E965-E325-11CE-BFC1-08002BE10318}\LowerFilters" 
 Err.Clear 
 On Error Resume Next 
-objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command fsutil behavior set DisableDeleteNotify 0 -v"), 1, True 
+WshShell.Run "fsutil behavior set disablelastaccess 1", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "fsutil behavior set DisableDeleteNotify 0", 1, True 
 Err.Clear 
  
 On Error Resume Next 
@@ -1079,6 +1197,9 @@ Err.Clear
 On Error Resume Next 
 
 Rem >> Bootvorgang und Prefetchoptimierungen (Bootperformance und Programmstarts werden verbessert) << 
+Err.Clear
+On Error Resume Next 
+WshShell.Run "fsutil resource setAutoReset true c:\", 1, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "sc config ""SysMain"" start=auto & sc start ""SysMain""", 1, True 
@@ -1092,12 +1213,13 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\RunLogonScriptSync", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\RestartApps", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\RunLogonScriptSync", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\RunStartupScriptSync", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\VerboseStatus", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\DelayedDesktopSwitchTimeout", 5, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\DisableStatusMessages", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\DisplayLastLogonInfo", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableFirstLogonAnimation", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\RunStartupScriptSync", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\ShutdownWithoutLogon", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\VerboseStatus", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\ShutdownWithoutLogon", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization\NoChangingLockScreen", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization\NoChangingStartMenuBackground", 0, "REG_DWORD" 
@@ -1123,6 +1245,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\DelayedApps\BoxedPriorityClass", 16384, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\DelayedApps\Delay_Sec", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize\StartupDelayInMSec", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize\WaitForIdleState", 0, "REG_DWORD" 
 Err.Clear 
 On Error Resume Next 
 WshShell.RegDelete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\LegalNoticeCaption" 
@@ -1168,7 +1291,7 @@ MyFile.WriteLine ("Err.Clear ")
 MyFile.WriteLine ("WScript.Quit ") 
 MyFile.WriteLine (" ") 
 MyFile.WriteLine ("rem 	******************************************************************* ") 
-MyFile.WriteLine ("rem 	* !c3 AUTOSTART-OPTIMIZER is Part of the WINDOWS-OPTIMIZER 	  * ") 
+MyFile.WriteLine ("rem 	* AUTOSTART-OPTIMIZER is Part of the WINDOWS-OPTIMIZER-PROJECT 	  * ") 
 MyFile.WriteLine ("rem 	* -written by 							  * ") 
 MyFile.WriteLine ("rem 	* René Bengsch							  * ") 
 MyFile.WriteLine ("rem 	* info/contact @ 						  * ") 
@@ -1293,7 +1416,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\E
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDa", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarGlomLevel", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarSizeMove", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarSmallIcons", 1, "REG_DWORD" 
+REM WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarSmallIcons", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ThumbnailLivePreviewHoverTime", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TypeAhead", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\LaunchTo", 2, "REG_DWORD" 
@@ -1308,9 +1431,13 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\E
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel\{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MultitaskingView\AltTabViewHost\Wallpaper", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ribbon\MinimizedStateTabletModeOff", 1, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\NumThumbnails" 
+Err.Clear 
+On Error Resume Next 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\MaxThumbSizePx", 256, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\MinThumbSizePx", 256, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\NumThumbnails", 10, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ThumbnailQuality", 100, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\VisualFXSetting", 3, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh\IsPrelaunchEnabled", 0, "REG_DWORD" 
@@ -1373,24 +1500,29 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoRestartShell", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell", "explorer.exe", "REG_SZ" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Shell\ActionCenter\Quick Actions\PinnedQuickActionSlotCount", 4, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDocuments", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDocuments_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDownloads", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDownloads_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderFileExplorer", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderFileExplorer_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderMusic", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderMusic_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderNetwork", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderNetwork_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPersonalFolder", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPersonalFolder_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPictures", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPictures_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderSettings", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderSettings_ProviderSet", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderVideos", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderVideos_ProviderSet", 1, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDocuments", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDocuments_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDownloads", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderDownloads_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderFileExplorer", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderFileExplorer_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderMusic", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderMusic_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderNetwork", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderNetwork_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPersonalFolder", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPersonalFolder_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPictures", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderPictures_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderSettings", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderSettings_ProviderSet", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderVideos", 1, "REG_DWORD" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start\AllowPinnedFolderVideos_ProviderSet", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SharePlatform\EnableNewShareFlow", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\StigRegKey\Typing\TaskbarAvoidanceEnabled\Enable", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\StigRegKey\Typing\TaskbarAvoidanceEnabled\TaskbarAvoidanceEnabled", 1, "REG_DWORD" 
@@ -1536,87 +1668,133 @@ Err.Clear
 Rem >> Kontext-Menu-Erweiterung << 
 Err.Clear 
 On Error Resume Next 
-WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\" , "" 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\" , "" 
 Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\MultipleInvokePromptMinimum", 16, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\", "Start &High Priority", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\MUIVerb", "Öffnen mit hoher Priorität", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\MUIVerb", "Open with high Priority", "REG_SZ" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\Command\", "cmd.exe /c start ""StartHigh"" /High ""%1""", "REG_SZ" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\", "Start &Low Priority", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\MUIVerb", "Öffnen mit niedriger Priorität", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\MUIVerb", "Open with low Priority", "REG_SZ" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\Command\", "cmd.exe /c start ""StartLow"" /Low ""%1""", "REG_SZ" 
 Err.Clear 
 On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\"  & " /f", 1, True 
-Err.Clear 
-If WinValue <> "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\icon", "Control.exe", "REG_SZ" 
-If WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\icon", "SystemSettingsBroker.exe", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\MUIVerb", "System-Einstellungen", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\MUIVerb", "System-Settings", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\Position", "Bottom", "REG_SZ" 
-If WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\SettingsURI", "ms-settings:", "REG_SZ" 
-If WinValue <> "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\command\", "control /name Microsoft.System", "REG_SZ" 
-If WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\command\DelegateExecute", "{556FF0D6-A1EE-49E5-9FA4-90AE116AD744}", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\", "@shell32.dll,-4161", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\icon", "Control.exe", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\Position", "Bottom", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\command\", "control.exe", "REG_SZ" 
-On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GodMode\"  & " /f", 1, True 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\"  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\"  & " /f", 1, True 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\", "Start &High Priority", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\MUIVerb", "Öffnen mit hoher Priorität", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\MUIVerb", "Open with high Priority", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartHigh\Command\", "cmd.exe /c start ""StartHigh"" /High ""%1""", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\", "Start &Low Priority", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\MUIVerb", "Öffnen mit niedriger Priorität", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\MUIVerb", "Open with low Priority", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\StartLow\Command\", "cmd.exe /c start ""StartLow"" /Low ""%1""", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes and WinValue <> "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\icon", "Control.exe", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\icon", "SystemSettingsBroker.exe", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\MUIVerb", "System-Einstellungen", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\MUIVerb", "System-Settings", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\SettingsURI", "ms-settings:", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\command\", "control /name Microsoft.System", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Computer-Settings\command\DelegateExecute", "{556FF0D6-A1EE-49E5-9FA4-90AE116AD744}", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\", "@shell32.dll,-4161", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\icon", "Control.exe", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control\command\", "control.exe", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\GodMode\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & """HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode"""  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next
-If WinValue <> "5.1" and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\", "Alle Aufgaben", "REG_SZ" 
-If WinValue <> "5.1" and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\", "All Tasks", "REG_SZ" 
-If WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\icon", "Control.exe", "REG_SZ" 
-If WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\Position", "Bottom", "REG_SZ" 
-If WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\command\", "explorer shell:::{ED7BA470-8E54-465E-825C-99712043E01C}", "REG_SZ" 
-On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\"  & " /f", 1, True 
+If SMPlus = vbYes and WinValue <> "5.1" and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\", "Alle Aufgaben", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\", "All Tasks", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\icon", "Control.exe", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control God-Mode\command\", "explorer shell:::{ED7BA470-8E54-465E-825C-99712043E01C}", "REG_SZ" 
 Err.Clear 
 On Error Resume Next 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\icon", "powercpl.dll", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\MUIVerb", "Energiesparplan ändern", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\MUIVerb", "Choose a Power Plan", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Position", "Bottom", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\SubCommands", "", "REG_SZ" 
-If WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\icon", "powercpl.dll", "REG_SZ" 
-If WinValue = "10." and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\MUIVerb", "Ultimative Leistung", "REG_SZ" 
-If WinValue = "10." and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\MUIVerb", "Ultimate Performance", "REG_SZ" 
-If WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\Command\", "powercfg.exe /s 88ac267b-4dc0-3b86-99dc-d1094efcbc47",  "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\icon", "powercpl.dll", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\MUIVerb", "Höchstleistung", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\MUIVerb", "High Performance", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\Command\", "powercfg.exe /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",  "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\icon", "powercpl.dll", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\MUIVerb", "Ausbalanciert", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\MUIVerb", "Balanced", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\Command\", "powercfg.exe /s 381b4222-f694-41f0-9685-ff5bb260df2e", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\icon", "powercpl.dll", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\MUIVerb", "Energiesparmodus", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\MUIVerb", "Power Saver", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\Command\", "powercfg.exe /s a1841308-3541-4fab-bc81-f71556f20b4a", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\icon", "control.exe", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\MUIVerb", "Einstellungen", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\MUIVerb", "Settings", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\Command\", "Control Powercfg.cpl", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\icon", "taskmgr.exe", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\Position", "Bottom", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\MUIVerb", "Task-Manager", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\Command\", "taskmgr.exe", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\icon", "cleanmgr.exe", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\MUIVerb", "Laufwerk bereinigen", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\MUIVerb", "Clean up Volume", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\command\", "cmd.exe /c start /High Cleanmgr.exe %1", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\icon", "defrag.exe", "REG_SZ" 
-If Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\MUIVerb", "Laufwerk optimieren", "REG_SZ" 
-If Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\MUIVerb", "Optimize Drive", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\command\", "cmd.exe /c start /High dfrgui.exe", "REG_SZ" 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & """HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs"""  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next
+If SMPlus = vbYes and WinValue <> "5.1" and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs\", "Alle Programme", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs\", "All Applications", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs\icon", "Control.exe", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes and WinValue <> "5.1" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Control Programs\command\", "explorer shell:::{4234d49b-0245-4df3-b780-3893943456e1}", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\icon", "powercpl.dll", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\MUIVerb", "Energiesparplan ändern", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\MUIVerb", "Choose a Power Plan", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\SubCommands", "", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\icon", "powercpl.dll", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\MUIVerb", "Ultimative Leistung", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\MUIVerb", "Ultimate Performance", "REG_SZ" 
+If SMPlus = vbYes and WinValue = "10." then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\A-Ultimate Performance\Command\", "powercfg.exe /s 88ac267b-4dc0-3b86-99dc-d1094efcbc47",  "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\icon", "powercpl.dll", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\MUIVerb", "Höchstleistung", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\MUIVerb", "High Performance", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\B-High Performance\Command\", "powercfg.exe /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",  "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\icon", "powercpl.dll", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\MUIVerb", "Ausbalanciert", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\MUIVerb", "Balanced", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\C-Balanced\Command\", "powercfg.exe /s 381b4222-f694-41f0-9685-ff5bb260df2e", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\icon", "powercpl.dll", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\MUIVerb", "Energiesparmodus", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\MUIVerb", "Power Saver", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\D-Power Saver\Command\", "powercfg.exe /s a1841308-3541-4fab-bc81-f71556f20b4a", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\icon", "control.exe", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\MUIVerb", "Einstellungen", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\MUIVerb", "Settings", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\SwitchPowerScheme\Shell\Z-Settings\Command\", "Control Powercfg.cpl", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\icon", "taskmgr.exe", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\Position", "Bottom", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\MUIVerb", "Task-Manager", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\DesktopBackground\Shell\Taskmanager\Command\", "taskmgr.exe", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\icon", "cleanmgr.exe", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\MUIVerb", "Laufwerk bereinigen", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\MUIVerb", "Clean up Volume", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Cleanmanager\command\", "cmd.exe /c start /High Cleanmgr.exe %1", "REG_SZ" 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbNo then WshShell.run "Reg Delete " & "HKEY_CLASSES_ROOT\Drive\shell\Defrag\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\icon", "defrag.exe", "REG_SZ" 
+If SMPlus = vbYes and Language = "deutsch" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\MUIVerb", "Laufwerk optimieren", "REG_SZ" 
+If SMPlus = vbYes and Language = "english" then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\MUIVerb", "Optimize Drive", "REG_SZ" 
+If SMPlus = vbYes then WSHShell.RegWrite "HKEY_CLASSES_ROOT\Drive\shell\Defrag\command\", "cmd.exe /c start /High dfrgui.exe", "REG_SZ" 
 WSHShell.RegWrite "HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\Open With\", "{09799AFB-AD67-11d1-ABCD-00C04FC30936}", "REG_SZ" 
 WSHShell.RegWrite "HKEY_CLASSES_ROOT\IE.AssocFile.URL\shellex\ContextMenuHandlers\{09799AFB-AD67-11d1-ABCD-00C04FC30936}\", "REG_SZ"
 WSHShell.RegWrite "HKEY_CLASSES_ROOT\InternetShortcut\shell\Öffnen in neuem Fenster\command\", "rundll32.exe shdocvw.dll,OpenURL %l", "REG_SZ" 
@@ -1638,7 +1816,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Adobe\Acrobat Reader\DC\AVGeneral\
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Adobe\Acrobat Reader\DC\AVGeneral\iDelayBeforeQuitBrowser", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Adobe\Acrobat Reader\DC\AVGeneral\iDelayBeforeQuitViewer", 0, "REG_DWORD" 
 
-Rem >> !c3-NVIDIA-CoolBits 2.0 (Schaltet alle versteckte Optionen von NVIDIA Grafikkartentreibern frei) << 
+Rem >> W-O-P NVIDIA-CoolBits 2.0 (Schaltet alle versteckte Optionen von NVIDIA Grafikkartentreibern frei) << 
 Err.Clear 
 On Error Resume Next 
 strComputer = "."
@@ -1682,13 +1860,15 @@ Err.Clear
 On Error Resume Next 
 
 Rem Enter PRIVATE DNS-SERVERS HERE!! 
-PrivateIPv4DNSServer = ""
-PrivateIPv6DNSServer = ""
+PrivateIPv4DNSServer = "" 
+PrivateIPv6DNSServer = "" 
 
 Err.Clear 
 On Error Resume Next 
-If PrivateIPv4DNSServer <> "" Then PrivateIPv4DNS = PrivateIPv4DNSServer & ","
-If PrivateIPv6DNSServer <> "" Then PrivateIPv6DNS = PrivateIPv6DNSServer & ","
+PrivateIPv4DNS = PrivateIPv4DNSServer 
+PrivateIPv6DNS = PrivateIPv6DNSServer 
+If PrivateIPv4DNSServer <> "" and DNSPlus = vbYes Then PrivateIPv4DNS = PrivateIPv4DNSServer & ","
+If PrivateIPv6DNSServer <> "" and DNSPlus = vbYes Then PrivateIPv6DNS = PrivateIPv6DNSServer & ","
 Err.Clear 
 On Error Resume Next 
 Set objShell = CreateObject("WScript.Shell")
@@ -1711,7 +1891,8 @@ objRegistry.SetDWORDValue strRegRoot, strFullPath, "TCPNoDelay", 1
 objRegistry.getSTRINGValue strRegRoot, strFullPath, "DhcpNameServer", strValue
 DhcpNameServer = ""
 if strValue <> "" then DhcpNameServer = "," & strValue
-objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv4DNS & "1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4" & DhcpNameServer
+If DNSPlus = vbYes then objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv4DNS & "1.1.1.1,1.0.0.1" & DhcpNameServer 
+REM If DNSPlus = vbNo then objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv4DNS & "" 
 Next
 End If
 End If	
@@ -1730,7 +1911,13 @@ strFullPath = strKey & strKeyName
 Else
 strFullPath = strKey & "\" & strKeyName
 End If
-objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv6DNS & "2606:4700:4700::1111,2606:4700:4700::1001,2001:4860:4860::8888,2001:4860:4860::8844" 
+objRegistry.SetDWORDValue strRegRoot, strFullPath, "TcpAckFrequency", 1 
+objRegistry.SetDWORDValue strRegRoot, strFullPath, "TcpDelAckTicks", 0 
+objRegistry.SetDWORDValue strRegRoot, strFullPath, "TCPNoDelay", 1 
+objRegistry.getSTRINGValue strRegRoot, strFullPath, "DhcpNameServer", strValue
+DhcpNameServer = ""
+If DNSPlus = vbYes then objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv6DNS & "2606:4700:4700::1111,2606:4700:4700::1001" 
+REM If DNSPlus = vbNo then objRegistry.SetSTRINGValue strRegRoot, strFullPath, "NameServer", PrivateIPv6DNS & "" 
 Next
 End If
 End If	
@@ -1749,6 +1936,58 @@ WshShell.Run "ipconfig /registerdns", 1, True
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "netsh winsock reset", 1, True 
+Err.Clear 
+
+On Error Resume Next 
+Command1 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 64 -v"
+Command2 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 128 -v"
+Command3 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 256 -v"
+Command4 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 512 -v"
+Command5 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 1024 -v"
+Command6 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*TransmitBuffers"" -RegistryValue 2048 -v"
+Command7 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 64 -v"
+Command8 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 128 -v"
+Command9 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 256 -v"
+Command10 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 512 -v"
+Command11 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 1024 -v"
+Command12 = "Get-Netadapter -Physical | Set-NetAdapterAdvancedProperty -RegistryKeyword ""*ReceiveBuffers"" -RegistryValue 2048 -v"
+
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command1), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command2), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command3), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command4), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." and Speicher >= 3072 then objShell.Run("powershell -Command " & Command5), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." and Speicher >= 4096 then objShell.Run("powershell -Command " & Command6), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command7), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command8), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command9), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then objShell.Run("powershell -Command " & Command10), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." and Speicher >= 3072 then objShell.Run("powershell -Command " & Command11), 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." and Speicher >= 4096 then objShell.Run("powershell -Command " & Command12), 1, True 
 Err.Clear 
 
 On Error Resume Next 
@@ -1781,7 +2020,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\
 If Language = "deutsch" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Search\SearchAssistant", "http://www.google.de/ie", "REG_SZ" 
 If Language = "english" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Search\SearchAssistant", "http://www.google.com/ie", "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\AutoComplete\Append Completion", "yes", "REG_SZ" 
-WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Window Title", "!c3-OPTIMIZED-SYSTEM", "REG_SZ" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Window Title", "W-O-P OPTIMIZED-SYSTEM", "REG_SZ" 
 If Language = "deutsch" then WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Search Bar", "http://www.google.de/ie", "REG_SZ" 
 If Language = "english" then WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Search Bar", "http://www.google.com/ie", "REG_SZ" 
 If Language = "deutsch" then WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Search Page", "http://www.google.de", "REG_SZ" 
@@ -1805,10 +2044,12 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\I
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\5.0\Cache\Content\CacheLimit", 256000, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\5.0\Cache\ContentLimit", 250, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\BackgroundModeEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\ConfigureDoNotTrack", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\EfficiencyModeOnPowerEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\HardwareAccelerationModeEnabled", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\StartupBoostEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\BackgroundModeEnabled", 0, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\ConfigureDoNotTrack", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\EfficiencyModeOnPowerEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\HardwareAccelerationModeEnabled", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\Recommended\StartupBoostEnabled", 0, "REG_DWORD" 
@@ -1909,10 +2150,19 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Pa
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmissions", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpTimedWaitDelay", 30, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\StrictTimeWaitSeqCheck", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\DnsPriority", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\HostsPriority", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\LocalPriority", 1, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\NetbtPriority", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\LocalPriority", 4, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\HostsPriority", 5, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\DnsPriority", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider\NetbtPriority", 7, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\Tcp1323Opts", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\TcpMaxConnectRetransmissions", 2, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\TcpMaxDataRetransmissions", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\TcpTimedWaitDelay", 30, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\StrictTimeWaitSeqCheck", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\ServiceProvider\LocalPriority", 4, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\ServiceProvider\HostsPriority", 5, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\ServiceProvider\DnsPriority", 6, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\ServiceProvider\NetbtPriority", 7, "REG_DWORD" 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "netsh int tcp set global rss=enabled", 1, True 
@@ -2053,6 +2303,7 @@ Err.Clear
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\GameBar\AllowAutoGameMode", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\GameBar\AutoGameModeEnabled", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\GameBar\UseNexusForGameBarEnabled", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR\EchoCancellationEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR\HistoricalCaptureEnabled", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\System\GameConfigStore\GameDVR_DXGIHonorFSEWindowsCompatible", 0, "REG_DWORD" 
@@ -2080,6 +2331,31 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games\Priority", 6, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games\Scheduling Category", "High", "REG_SZ" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games\SFIO Priority", "High", "REG_SZ" 
+ 
+Err.Clear 
+On Error Resume Next 
+Set objShell = CreateObject("WScript.Shell")
+Const HKEY_CURRENT_USER = &H80000001
+strComputer = "."
+Set objRegistry = GetObject("winmgmts:{impersonationLevel=Impersonate}!\\" & strComputer & "\root\default:StdRegProv")
+strRegRoot = HKEY_CURRENT_USER
+strKey = "SOFTWARE\Microsoft\DirectX\UserGpuPreferences"
+If objRegistry.EnumKey(strRegRoot, strKey, arrKeyNames) = 0 Then
+If IsNull(arrKeyNames) = False Then 
+For Each strKeyName In arrKeyNames
+If Right(strKey, 1) = "\" Then
+strFullPath = strKey & strKeyName
+Else
+strFullPath = strKey & "\" & strKeyName
+End If
+objRegistry.SetStringValue strRegRoot, strFullPath, "GpuPreference=2;" 
+Next
+End If
+End If	
+Err.Clear 
+On Error Resume Next 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\DirectX\GraphicsSettings\SwapEffectUpgradeCache", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\DirectX\UserGpuPreferences\DirectXUserGlobalSettings", "AutoHDREnable=1;SwapEffectUpgradeEnable=1;VRROptimizeEnable=1;", "REG_SZ" 
 
 Rem >> Windows-Media-Player optimieren << 
 Err.Clear 
@@ -2092,6 +2368,14 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\MediaPlayer\Preferences\
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\MediaPlayer\Preferences\UsageTracking", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\MediaPlayer\Preferences\UseDefaultBufferTime", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\MediaPlayer\Preferences\Volume", 100, "REG_DWORD" 
+ 
+Err.Clear 
+On Error Resume Next 
+If AddressWidth = "64" then WshShell.Run "unregmp2.exe /SwapTo:64", 1, True 
+If AddressWidth = "64" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wmplayer.exe\", """%ProgramFiles%\Windows Media Player\wmplayer.exe""", "REG_EXPAND_SZ"
+If AddressWidth = "64" then WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\mplayer2.exe\", """%ProgramFiles%\Windows Media Player\wmplayer.exe""", "REG_EXPAND_SZ"
+Err.Clear 
+On Error Resume Next 
 
 Rem >> Office Optimieren << 
 Err.Clear 
@@ -2165,7 +2449,7 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersi
 WshShell.Run "gpupdate /force", 1, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "Explorer.exe", 1, True 
+WshShell.Run "Explorer.exe", 1, False 
 Err.Clear 
  
 Rem >> Store reset << 
@@ -2186,21 +2470,29 @@ On Error Resume Next
 If WinValue = "10." then WshShell.Run "winget source update", 1, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "WSReset.exe -i", 1, True 
+If WinValue = "10." then WshShell.Run "winget install --id=Microsoft.VCRedist.2015+.x86 -e --accept-source-agreements --accept-package-agreements", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "winget install --id=Microsoft.VCRedist.2015+.x64 -e --accept-source-agreements --accept-package-agreements", 1, True 
+Err.Clear 
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Dism /online /Enable-Feature /FeatureName:NetFx3 /All /NoRestart", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "WSReset.exe -i", 2, False 
 Err.Clear 
 End Sub  
 
 Sub DirectX ()
 Err.Clear 
 On Error Resume Next   
-If Language = "deutsch" then DX = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
-& vbNewLine & "durch den " & title & " noch alle optionalen " _ 
-& vbNewLine & "DirectX-Laufzeitkomponenten Installieren und Aktualisieren?? ", _ 
-vbSystemModal + vbYesNo, Version) 
+If Language = "deutsch" then DX = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung durch dieses Tool noch alle optionalen DIRECTX-LAUFZEITKOMPONENTEN Installieren und Aktualisieren?? " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 
-If Language = "english" then DX = MsgBox ("Do you want to install and update all optional " _ 
-& vbNewLine & "DirectX-Runtime-Components? ", _ 
-vbSystemModal + vbYesNo, Version) 
+If Language = "english" then DX = MsgBox ("Do you want to install and update all optional DIRECTX-RUNTIME-COMPONENTS? " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 If DX = vbYes then DXOpt
 Err.Clear 
 End Sub
@@ -2231,20 +2523,26 @@ if fso2.FileExists(deletefilepath) then
     fso2.DeleteFile deletefilepath, True
 End if 
 Err.Clear 
+
+On Error Resume Next 
+If WinValue = "10." then WshShell.Run "Dism /online /Enable-Feature /FeatureName:DirectPlay /All /NoRestart", 1, True 
+Err.Clear 
 End Sub 
 
 Sub UpdateAllApps ()
 Err.Clear 
 On Error Resume Next   
-If Language = "deutsch" then UpdateApps = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung " _ 
-& vbNewLine & "durch den " & title & " noch alle installierten Programme Aktualisieren?? " & vbNewLine _ 
-& vbNewLine & "Dieser Vorgang kann mehrere Minuten dauern. ", _ 
-vbSystemModal + vbYesNo, Version) 
+If WinValue = "10." and Language = "deutsch" then UpdateApps = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung durch dieses Tool noch ALLE INSTALLIERTEN PROGRAMME AKTUALISIEREN? " & vbNewLine _ 
+& vbNewLine & "Dieser Vorgang kann mehrere Minuten dauern... " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 
-If Language = "english" then UpdateApps = MsgBox ("Do you want to update all installed Programms? " & vbNewLine _ 
-& vbNewLine & "This Process can take a few minutes. ", _ 
-vbSystemModal + vbYesNo, Version) 
+If WinValue = "10." and Language = "english" then UpdateApps = MsgBox ("Do you want to UPDATE ALL INSTALLED PROGRAMMS? " & vbNewLine _ 
+& vbNewLine & "This Process can take a few minutes... " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
 If UpdateApps = vbYes then WshShell.Run "winget upgrade --accept-source-agreements --all", 3, True 
+If UpdateApps = vbYes then WshShell.Run "winget upgrade --accept-source-agreements --all --include-unknown", 3, True 
 Err.Clear 
 End Sub 
  
@@ -2271,13 +2569,27 @@ ende = Timer
 If WinValue = "10." then UpdateAllApps
 Err.Clear 
 restart = Timer 
+
+Err.Clear 
 On Error Resume Next 
-If HDOptimizer = "yes" then HDOpt 
+ende = Timer 
+If Language = "deutsch" then HD = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung durch dieses Tool noch ALLE FESTPLATTEN OPTIMIEREN? " & vbNewLine & vbNewLine & HD1 & vbNewLine _ 
+& vbNewLine & "Dieser Vorgang kann einige Minuten bis mehrere Stunden dauern... " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: JA ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+
+If Language = "english" then HD = MsgBox ("Do you want to OPTIMZE ALL HARDDRIVES after optimizing by this Tool? " & vbNewLine & vbNewLine & HD1 & vbNewLine _ 
+& vbNewLine & "This Process can take a few minutes to several hours... " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: YES ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton1, Version) 
+If HD = vbYes then HDOpt 
 Err.Clear 
 
 Rem >> Abschliessend alle Hintergrundprozesse Ausführen << 
+Err.Clear 
+restart = Timer 
 On Error Resume Next 
-WshShell.Run "cmd.exe /c net start wuauserv & net start bits", 3, True 
+WshShell.Run "cmd.exe /c net start wuauserv & net start bits & net start defragsvc", 3, True 
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
@@ -2310,6 +2622,42 @@ Set colProcesses = objWMIService.ExecQuery _
 For Each objProcess in colProcesses  
 objProcess.SetPriority(Above_Normal)  
 Next 
+
+Sub Rescue ()
+Err.Clear 
+On Error Resume Next 
+restart = Timer 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\SetupCompletedSuccessfully", 0, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "netsh advfirewall Reset", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "cmd.exe /c echo "& version &"Rescue-Option activated - please wait.... & echo\ & echo Step1: Dism /Online /Cleanup-Image /ScanHealth & Dism /Online /Cleanup-Image /ScanHealth && echo\ & echo\ & echo Step2: Dism /Online /Cleanup-Image /CheckHealth & Dism /Online /Cleanup-Image /CheckHealth && echo\ & echo\ & echo Step3: Dism /Online /Cleanup-Image /RestoreHealth & Dism /Online /Cleanup-Image /RestoreHealth && echo\ & echo\ & echo Step4: SFC /SCANNOW & SFC /SCANNOW  && echo\ & echo\ & echo Done.", 3, True 
+Err.Clear 
+On Error Resume Next 
+objShell.Run ("C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command Start-MpWDOScan -v"), 1, True 
+Err.Clear 
+End Sub 
+
+Err.Clear 
+On Error Resume Next  
+ende = Timer 
+If Language = "deutsch" then RescueOption = MsgBox ("Möchten Sie im Anschluß zusätzlich an die Anpassung durch dieses Tool noch die RESCUE-OPTION nutzen? " _ 
+& vbNewLine & vbNewLine & "Durch eine aktivierte RESCUE-OPTION werden alle Systemdateien überprüft, fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurückgesetzt. Im Anschluss wird noch eine vollständige Defender-Offline-Virenprüfung gestartet. Nach dem nächsten Neustart wird der Datei-Index vollständig neu erstellt.  " & vbNewLine _ 
+& vbNewLine & "Dieser Vorgang kann einige Minuten bis mehrere Stunden dauern... " & vbNewLine _ 
+& vbNewLine & "Empfohlene Auswahl: NEIN ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton2, Version) 
+
+If Language = "english" then RescueOption = MsgBox ("Would you like to use the RESCUE-OPTION after customizing with this Tool? " _ 
+& vbNewLine & vbNewLine & "When the RESCUE-OPTION is activated, all System-Files will be checked, incorrect or missing Files will be replaced with original ones from Microsoft and all Windows-Firewall Settings will be reset to Windows-Standard. A full Defender-Offline-Virus-Check will then be started at the end. After the next Restart, the File-Index will be completely rebuilt. " & vbNewLine _ 
+& vbNewLine & "This Process can take a few minutes to several hours... " & vbNewLine _ 
+& vbNewLine & "Recommended Selection: NO ", _ 
+vbSystemModal + vbYesNo + vbDefaultButton2, Version) 
+If RescueOption = vbYes then Rescue 
+Err.Clear 
+
+On Error Resume Next 
 Set WshShell = Nothing 
 Set objShell = Nothing 
 ende = Timer 
@@ -2319,8 +2667,7 @@ Rem >> Finish Installation <<
 Err.Clear 
 On Error Resume Next 
 If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgreich optimiert!!! " & vbNewLine & vbNewLine & "Zeit (sec.) :" & vbTab & ende-start _ 
-& vbNewLine & vbNewLine & "Das Anpassen von " & WinVersionCheck & " ist jetzt abgeschlossen und " _ 
-& vbNewLine & "wird nach dem nächsten Neustart vollständig wirksam... " _ 
+& vbNewLine & vbNewLine & "Die Anpassung von " & WinVersionCheck & " ist jetzt abgeschlossen und wird nach dem nächsten Neustart vollständig wirksam... " _ 
 & vbNewLine & vbNewLine & "Besucht unsere offizielle Projekt-Gruppe unter: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
 & vbNewLine & vbNewLine & "Besucht unser offizielles GitHub-Projekt unter: " _ 
@@ -2329,8 +2676,7 @@ If Language = "deutsch" Then shutdown = MsgBox (winversioncheck &" wurde erfolgr
 vbSystemModal + vbOKCancel, Version) 
 
 If Language = "english" Then shutdown = MsgBox (winversioncheck &" was optimized successfully!!! " & vbNewLine & vbNewLine & "Time (sec.) :" & vbTab & ende-start _ 
-& vbNewLine & vbNewLine & "Adjusting " & WinVersionCheck & " is now complete and " _ 
-& vbNewLine & "will take effect after the next reboot... " _ 
+& vbNewLine & vbNewLine & "Adjusting " & WinVersionCheck & " is now complete and will take effect after the next reboot... " _ 
 & vbNewLine & vbNewLine & "Don´t forget to visit our official Project-Group: " _ 
 & vbNewLine & "https://www.facebook.com/groups/WindowsOptimizer " _ 
 & vbNewLine & vbNewLine & "Don´t forget to visit our official GitHub-Project: " _ 
@@ -2339,6 +2685,8 @@ If Language = "english" Then shutdown = MsgBox (winversioncheck &" was optimized
 vbSystemModal + vbOKCancel, Version) 
 If shutdown <> vbOK then WScript.Quit 
  
+On Error Resume Next 
+WshShell.Run "taskkill /f /fi “status eq not responding”", 1, True 
 Err.Clear 
 On Error Resume Next 
 Set OpSysSet = GetObject("winmgmts:{(Shutdown)}//./root/cimv2").ExecQuery("select * from Win32_OperatingSystem where Primary=true") 
@@ -2350,7 +2698,7 @@ WScript.Quit
  
  
 rem 	******************************************************************* 
-rem 	* WINDOWS-OPTIMIZER-PROJECT 					  * 
+rem 	* W-O-P WINDOWS-OPTIMIZER-PROJECT 				  * 
 rem 	* -written by 							  * 
 rem 	* René Bengsch							  * 
 rem 	* info/contact @ 						  * 

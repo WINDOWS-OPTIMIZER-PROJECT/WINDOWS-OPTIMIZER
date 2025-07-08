@@ -416,6 +416,8 @@ On Error Resume Next
 WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & net stop defragsvc & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
 Err.Clear 
 On Error Resume Next 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\DelayedAutostart", 1,"REG_DWORD" 
+WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\Start", 2,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching\DriverUpdateWizardWuSearchEnabled", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoRebootWithLoggedOnUsers", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoUpdate", 0,"REG_DWORD" 

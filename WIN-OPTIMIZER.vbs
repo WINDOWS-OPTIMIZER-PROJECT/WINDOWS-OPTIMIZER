@@ -413,7 +413,22 @@ Err.Clear
 
 Rem >> Windows-Update << 
 On Error Resume Next 
-WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & net stop defragsvc & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
+WshShell.Run "cmd.exe /c net stop bits & net stop wuauserv & net stop cryptsvc & RMDIR /S /Q %windir%\SoftwareDistribution -v", 3, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "sc.exe sdset bits D:(A;CI;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "sc.exe sdset wuauserv D:(A;;CCLCSWRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)", 1, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "cmd.exe /c net start bits & net start wuauserv & net start cryptsvc", 3, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
 Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\DelayedAutostart", 1,"REG_DWORD" 
@@ -2087,13 +2102,6 @@ WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Ex
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPERSERVER\explorer.exe", a, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPERSERVER\iexplorer.exe", a, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters\TCPNoDelay", 1, "REG_DWORD" 
-Err.Clear 
-On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\"  & " /f", 1, True 
-Err.Clear 
-On Error Resume Next 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\EnableBITSMaxBandwidth", 0, "REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\UseSystemMaximum", 1, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched\NonBestEffortLimit", 0, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Dnscache\Parameters\CacheHashTableBucketSize", 50, "REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Dnscache\Parameters\CacheHashTableSize", 384, "REG_DWORD" 
@@ -2463,7 +2471,7 @@ Process.terminate(0)
 next 
 Err.Clear 
 On Error Resume Next 
-WshShell.Run "cmd.exe /c net start wuauserv & net start bits", 3, True 
+WshShell.Run "cmd.exe /c net start bits & net start wuauserv & net start cryptsvc", 3, True 
 Err.Clear 
 On Error Resume Next 
 If WinValue = "10." then WshShell.Run "winget source reset --force", 1, True 
@@ -2591,10 +2599,7 @@ Rem >> Abschliessend alle Hintergrundprozesse Ausführen <<
 Err.Clear 
 restart = Timer 
 On Error Resume Next 
-WshShell.Run "cmd.exe /c net start wuauserv & net start bits & net start defragsvc", 3, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
+WshShell.Run "cmd.exe /c net start bits & net start wuauserv & net start cryptsvc", 3, True 
 Err.Clear 
 On Error Resume Next  
 WshShell.Run "cmd.exe /c cd %ProgramFiles%\Windows Defender && MpCmdRun.exe -removedefinitions -dynamicsignatures && MpCmdRun.exe -SignatureUpdate", 1, true 

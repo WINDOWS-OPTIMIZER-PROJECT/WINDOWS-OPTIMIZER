@@ -431,12 +431,19 @@ On Error Resume Next
 WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
 Err.Clear 
 On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\DelayedAutostart", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\Start", 2,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BITS\Start", 2,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching\DriverUpdateWizardWuSearchEnabled", 1,"REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoRebootWithLoggedOnUsers", 1,"REG_DWORD" 
-WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoUpdate", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowAppStoreAutoUpdate\value", 2,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching\SearchOrderConfig", 1,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate\AutoDownload", 4,"REG_DWORD" 
@@ -460,33 +467,42 @@ WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion
 WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings\DownloadMode", 0,"REG_DWORD" 
 WSHShell.RegWrite "HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings\DownloadModeProvider", 8,"REG_DWORD" 
 Err.Clear 
-On Error Resume Next 
+On Error Resume Next
 WshShell.RegDelete "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU"
+Err.Clear 
+On Error Resume Next 
+REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 1, "REG_DWORD" 
 Err.Clear 
 On Error Resume Next 
 WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\"  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next 
-WshShell.RegDelete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility"
-Err.Clear 
-On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\"  & " /f", 1, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.RegDelete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\HideUnsupportedHardwareNotifications"
-Err.Clear 
-On Error Resume Next 
-REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup\AllowUpgradesWithUnsupportedTPMOrCPU", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassCPUCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassDiskCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassRAMCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassSecureBootCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassStorageCheck", 1, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig\BypassTPMCheck", 1, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility"
+Err.Clear 
+On Error Resume Next
 REM WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Microsoft\PCHC\UpgradeEligibility", 1, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.run "Reg Delete " & "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\"  & " /f", 1, True 
+Err.Clear 
+On Error Resume Next 
 REM WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV1", 0, "REG_DWORD" 
 REM WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache\SV2", 0, "REG_DWORD" 
+Err.Clear 
+On Error Resume Next 
+WshShell.RegDelete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\HideUnsupportedHardwareNotifications"
+Err.Clear 
+On Error Resume Next 
 REM WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\HideUnsupportedHardwareNotifications", 1, "REG_DWORD" 
+Err.Clear 
 
 Rem >> WinXP-POS-Ready-Embedded << 
 Err.Clear 

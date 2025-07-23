@@ -7,7 +7,7 @@ Rem	*****************************************************************
  
 Rem >> CurrentVersion << 
 title = "W-O-P WINDOWS-OPTIMIZER-PROJECT " 
-revision = "v.3.8.01 (Beta1) "
+revision = "v.3.8.02 (Beta1) "
 version = title & revision 
  
 
@@ -423,15 +423,6 @@ WshShell.Run "sc.exe sdset bits D:(A;CI;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)(A;;CCDC
 Err.Clear 
 On Error Resume Next 
 WshShell.Run "sc.exe sdset wuauserv D:(A;;CCLCSWRPLORC;;;AU)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)", 1, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "cmd.exe /c net start bits & net start wuauserv & net start cryptsvc", 3, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, True 
-Err.Clear 
-On Error Resume Next 
-WshShell.run "Reg Delete " & "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\BITS\"  & " /f", 1, True 
 Err.Clear 
 On Error Resume Next 
 WSHShell.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS\DelayedAutostart", 1,"REG_DWORD" 
@@ -2617,8 +2608,12 @@ Err.Clear
 Rem >> Abschliessend alle Hintergrundprozesse Ausführen << 
 Err.Clear 
 restart = Timer 
+Err.Clear 
 On Error Resume Next 
 WshShell.Run "cmd.exe /c net start bits & net start wuauserv & net start cryptsvc", 3, True 
+Err.Clear 
+On Error Resume Next 
+WshShell.Run "wuauclt.exe /resetauthorization /detectnow", 1, False 
 Err.Clear 
 On Error Resume Next  
 WshShell.Run "cmd.exe /c cd %ProgramFiles%\Windows Defender && MpCmdRun.exe -removedefinitions -dynamicsignatures && MpCmdRun.exe -SignatureUpdate", 1, true 

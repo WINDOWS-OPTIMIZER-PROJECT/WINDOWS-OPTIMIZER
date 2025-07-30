@@ -941,6 +941,7 @@ oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDef
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "PowerMizerDefaultAC", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForDP", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DelayedDetectionForHDMI", 0 
+oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "UseBestResolution", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "DeepColorHDMIDisable", 0 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "EnableRGBFullRange", 1 
 oReg.SetDWORDValue HKEY_LOCAL_MACHINE, strKeyPath & "\" & subkey, "SetDefaultFullRGBRangeOnHDMI", 1 

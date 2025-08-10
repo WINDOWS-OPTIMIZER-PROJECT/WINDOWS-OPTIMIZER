@@ -108,9 +108,9 @@ Die Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TES
 Antwort:  
 Natürlich - Mach richtig Action - Werde Teil der Community und lade Gott und die Welt ein, Teile unsere Beiträge, erzähl deinen Eindruck weiter und hilf mit, daß diese Projekt-Gruppe im ganzen Netz bekannt wird. Wir suchen auch ständig nach neuen Ideen oder Beta-Testern für neue Vorabversionen des WINDOWS-OPTIMIZER :)
 
-Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt in der Projektgruppe an - Viel Spaß mit dem aktuellen Update :)
-
-New Updates coming soon..  
+Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt in der Projektgruppe an - Viel Spaß mit dem aktuellen Update :)  
+  
+   
   
   
   

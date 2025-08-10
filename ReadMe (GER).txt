@@ -25,11 +25,10 @@ Discord: https://discord.gg/m3pNNvWegX
 
 
 Aktuelle Version: 
-WINDOWS-OPTIMIZER v.3.8.01 (Beta1)
+WINDOWS-OPTIMIZER v.3.8.02 (Beta1)
 Hier der Direktlink (RAR): 
-https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1
-Hier der Direktlink (OHNE RAR)
-https://www.dropbox.com/s/oocfdv99pgjl4bb/WIN-OPTIMIZER.vbs?dl=1
+https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/raw/refs/heads/main/WIN-OPTIMIZER.rar 
+
 New Updates coming soon..
 
 
@@ -132,7 +131,11 @@ New Updates coming soon..
 Alle wichtigen Änderungen zusammengefasst: 
 
 Changelog: 
-v.3.8.01 (Beta1) (Aktuelles Release!) 
+v.3.8.02 (Beta1) (Aktuelles Release!) 
+* Etwas "Code-Cleanup". 
+
+Changelog: 
+v.3.8.01 (Beta1)  
 * Erweiterter Kernel-Patch sorgt systemweit für mehr Durchsatz und bessere Reaktionszeiten. 
 * Die Erweiterungen "RESCUE-OPTION" aus den Windows-Optimizer-Rescue-Script wurde erweitert und in den WINDOWS-OPTIMIZER optional integriert. Durch eine aktivierte RESCUE-OPTION werden alle Systemdateien überprüft, fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurückgesetzt. Im Anschluss wird noch eine vollständige Defender-Offline-Virenprüfung gestartet. Nach dem Neustart wird der Datei-Index vollständig neu erstellt, was mehrere Minuten dauern kann. 
 * Die Erweiterungen die der Windowsoberfläche und dem Systemmenu hinzugefügt werden sind ab sofort optional und können durcht das Script aktiviert bzw. deaktiviert werden. 

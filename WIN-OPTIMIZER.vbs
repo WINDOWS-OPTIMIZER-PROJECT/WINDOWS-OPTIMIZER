@@ -2035,12 +2035,12 @@ Err.Clear
 On Error Resume Next 
 strDesktopFld = objFolderItem.Path
 Set objURLShortcut = objShell.CreateShortcut(strDesktopFld & "\Links\Windows-Optimizer-Project.URL")
-objURLShortcut.TargetPath = "https://www.facebook.com/groups/WindowsOptimizer"
+objURLShortcut.TargetPath = "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER"
 objURLShortcut.Save
 Err.Clear 
 On Error Resume Next 
 Set objURLShortcut = objShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows-Optimizer-Project.URL")
-objURLShortcut.TargetPath = "https://www.facebook.com/groups/WindowsOptimizer"
+objURLShortcut.TargetPath = "https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER"
 objURLShortcut.Save
 Err.Clear 
 On Error Resume Next 

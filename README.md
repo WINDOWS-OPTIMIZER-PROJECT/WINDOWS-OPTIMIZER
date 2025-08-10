@@ -113,8 +113,9 @@ Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt i
 New Updates coming soon..  
   
   
-***** Was ist neu? ***** 
-Alle wichtigen Änderungen zusammengefasst: 
+  
+***** Was ist neu? *****  
+Alle wichtigen Änderungen zusammengefasst:  
   
 Changelog: 
 v.3.8.02 (Beta1) (Aktuelles Release!) 

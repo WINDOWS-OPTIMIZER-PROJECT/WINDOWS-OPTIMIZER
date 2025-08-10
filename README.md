@@ -96,12 +96,12 @@ Antwort:
 Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR):  
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 
-18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen?  
-Antwort:  
+18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen?   
+Antwort:   
 Zum Entpacken von komprimierter Software oder Archiven empfehlen wir zum Beispiel die kostenlose Software 7-ZIP: https://7-zip.org/ 
 
 19. Windows-Script-Host deaktiviert?  
-Antwort:
+Antwort:  
 Die beiden Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TEST.vbs" und das Script "DARK LIGHT.vbs" wurden in der Windowseigenen Programmiersprache Visual-Basic-Script programmiert. Visual-Basic-Script ist in Windows bereits standartmäßig integriert und auch aktiviert, kann aber über die Einstellungen oder verschiedene Tools deaktiviert/aktiviert werden. Falls Windows-Script-Host in Windows deaktiviert wurde, können diese Scripte aus unserem Projekt nicht funktionieren und es kommt zu der Fehlermeldung "Windows-Script-Host deaktiviert!". In diesem Fall die beiliegende Registrierungsdatei >>"Windows Script Host aktivieren.reg"<< ausführen, um Windows-Script-Host wieder zu aktivieren (Windowsstandart).
 
 21. Kann ich helfen und darf ich noch weitere Leute in die Gruppe einladen oder Beiträge, die hier durch die Administratoren gepostet wurden weiterteilen?  

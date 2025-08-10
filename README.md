@@ -111,11 +111,11 @@ Natürlich - Mach richtig Action - Werde Teil der Community und lade Gott und di
 Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt in der Projektgruppe an - Viel Spaß mit dem aktuellen Update :)
 
 New Updates coming soon..
-
-
+  
+  
 ***** Was ist neu? ***** 
 Alle wichtigen Änderungen zusammengefasst: 
-
+  
 Changelog: 
 v.3.8.02 (Beta1) (Aktuelles Release!) 
 * Etwas "Code-Cleanup". 

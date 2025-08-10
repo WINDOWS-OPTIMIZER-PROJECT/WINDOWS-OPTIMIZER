@@ -19,7 +19,7 @@ New Updates coming soon..
 https://borncity.com/win/2022/12/26/windows-optimizer-version-3-4-released/
   
 
-  ***** FAQ *****
+  ***** FAQ *****  
 Häufig gestellte Fragen und Antworten zusammengefasst: 
 
 1. Was macht der WINDOWS-OPTIMIZER eigentlich genau? 
@@ -52,7 +52,7 @@ Antwort:
 in den meisten Fällen JA - Bei Schadsoftware sieht es da leider anders aus. Genau hierfür gibt es eine Spezielle „RESCUE-VERSION“ des WINDOWS-OPTIMIZER, die zusätzlich alle Systemdateien prüft und fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurücksetzt. Im Anschluss wird noch eine vollständige Offline-Virenprüfung gestartet. 
 
 Hier geht es zur RESCUE-EDITION: 
-https://www.dropbox.com/s/u1bkxd07dytbe6u/WIN-OPTIMIZER%20%28Rescue%29.vbs?dl=1
+EDIT: Bereits in das offizielle Windows-Otimizer-Script als "optionales Feature" integriert. 
 
 8. Stimmt es, daß die Entwickler des WINDOWS-OPTIMIZER in Kontakt mit Microsoft stehen und so z.B. auf aktuelle Probleme wie den aktuellen RDP-Bug reagieren können UND dazu sogar kurzfristig gegebenenfalls ein Fix kommt?
 Antwort:

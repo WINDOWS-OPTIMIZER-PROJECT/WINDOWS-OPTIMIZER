@@ -22,89 +22,90 @@ https://borncity.com/win/2022/12/26/windows-optimizer-version-3-4-released/
   ***** FAQ *****  
 Häufig gestellte Fragen und Antworten zusammengefasst: 
 
-1. Was macht der WINDOWS-OPTIMIZER eigentlich genau? 
-Antwort: 
+1. Was macht der WINDOWS-OPTIMIZER eigentlich genau?  
+Antwort:  
 Es ist völlig egal, wie viel Arbeitsspeicher ein System besitzt - Windows wird standartmäßig immer gleich installiert. Alle Windows-Caches werden dabei an die MINDESTANFORDERUNGEN der jeweiligen Windows-Version angepasst - eine Hardware-Abfrage findet NICHT statt. Der WINDOWS-OPTIMIZER passt verschiedene Windows-Caches, also Speicherbereiche sowie die Auslagerungsdateigröße völlig automatisch an die verbaute Hardware wie z.B. den Arbeitsspeicher (RAM) an. Dadurch wird Windows spürbar schneller und läuft auch wesentlich stabiler bei aufwändigen und sehr speicherlastigen Anwendungen. Hierzu gibt es eine Vielzahl an Empfehlungen auf der Microsoftseite (Quelle: https://docs.microsoft.com) - Die Formeln zur Grössenberechnung werden hier ausschließlich aus diesen von Microsoft empfohlenen Werten entnommen. Alle Windows-Energiesparpläne werden konfiguriert und der neue „versteckte“ Energiesparplan „Ultimative Leistung“ für High-End-PC’s wird freigeschaltet, als „Rocket-Boost“ konfiguriert und aktiviert um Energiesparmechanismen, die die Leistung beeinflussen zu deaktivieren. Verschiedene Features, die standardmäßig nicht in allen Windows-Versionen vorhanden sind werden ebenfalls freigeschaltet. Außerdem werden verschiedene Windows-Oberflächen-Einstellungen optimal konfiguriert, Animationen beschleunigt und ein paar zusätzliche Kontextmenüeinträge wie „Laufwerk bereinigen“, „Laufwerk optimieren“ per Rechtsclick auf einem Datenträger oder „System-Einstellungen“, „Systemsteuerung“, „Alle Aufgaben“, „Energiesparplan ändern“ oder „Task-Manager“ per Rechtsclick auf den Desktop erstellt. Anwendungen können per Rechtsclick mit verschiedenen Prioritäten gestartet werden. Als letzten Punkt werden die meisten „Optimierungen“ die durch tolle „Tuning-Tools“ gemacht werden wieder rückgängig bzw. auf sichere und von Microsoft empfohlene Werte zurückgesetzt. 
 
-2. Ist der WINDOWS-OPTIMIZER für meine Windows-Version geeignet?
-Antwort: 
+2. Ist der WINDOWS-OPTIMIZER für meine Windows-Version geeignet?  
+Antwort:  
 Der WINDOWS-OPTIMIZER unterstützt ALLE Windows-Versionen ab WINDOWS XP bis einschließlich WINDOWS 11 und jedes Update wird ausgiebig auf jedem System vor der Veröffentlichung getestet. Theoretisch könnte der WINDOWS-OPTIMIZER auch auf speziellen gemoddeten oder auch auf älteren WINDOWS-VERSIONEN funktionieren, aber niemand im Team sieht hier noch eine Relevanz dies zu testen.
 
-3. Merkt man überhaupt einen Unterschied und sind die Verbesserungen wirklich messbar? 
-Antwort:
+3. Merkt man überhaupt einen Unterschied und sind die Verbesserungen wirklich messbar?  
+Antwort:  
 Ja, den Unterschied merkt man auf jeden Fall sehr deutlich - Hier sind einige Vorher/Nachher Vergleichtests: 
 https://www.facebook.com/groups/WindowsOptimizer/permalink/760344111089013/
 
-4. Was ist der AUTOSTART-OPTIMIZER und was macht der? 
-Antwort: 
+4. Was ist der AUTOSTART-OPTIMIZER und was macht der?  
+Antwort:  
 Der "AUTOSTART-OPTIMIZER" ist ein kleines VB-Script, das durch den "WINDOWS-OPTIMIZER" automatisch in das Autostartverzeichnis von Windows installiert wird. Dieses kleine Tool sucht nach dem Systemstart im Taskmanager nach der Explorer.exe und vergibt diesem Prozess eine erhöhte Prozesspriorität und beendet sich danach selber. Durch die etwas höhere Prozesspriorität wird die gesamte Oberfläche von Windows mit allen Kontextmenus sowie copy/paste/delete etwas beschleunigt und reagiert direkter.
 
-5. Kann ich die Veränderungen, die durch den WINDOWS-OPTIMIZER gemacht werden wieder Rückgängig machen? 
-Antwort:
+5. Kann ich die Veränderungen, die durch den WINDOWS-OPTIMIZER gemacht werden wieder Rückgängig machen?   
+Antwort:  
 Durch eine SYSTEMWIEDERHERSTELLUNG zu einem Zeitpunkt VOR dem Patch mit dem WINDOWS-OPTIMIZER werden alle Veränderungen wieder zurückgesetzt. Zu diesem Zweck kann auch extra während der Installationsroutine noch bevor irgend etwas verändert wird, ein optionaler SYSTEMWIEDERHERSTELLUNGSPUNKT mit dem Namen „Reset !c3 WIN-OPTIMIZER“ erstellt werden - stellt bitte VOR der Installation sicher, daß die Systemwiederherstellung aktiviert ist und zuverlässig funktioniert! Außerdem wird unter C: eine vollständige Sicherung der Registry als „Registry-Backup.reg“ vor der Anpassung durch den WINDOWS-OPTIMIZER angelegt.
 
-6. Ich habe Vorurteile gegen „Tuning-Tools“ - Die Zerschießen doch Windows und “Optimieren“ alles kaputt..
-Antwort:
+6. Ich habe Vorurteile gegen „Tuning-Tools“ - Die Zerschießen doch Windows und “Optimieren“ alles kaputt..  
+Antwort:  
 Das ist Richtig und korrekt. Windows funktioniert im Desktop-Betrieb perfekt auch ohne diese Programme. Mittlerweile ist ein Großteil des WINDOWS-OPTIMIZER das Rückgängig machen und Reparieren der Probleme, die durch diese Programme verursacht werden. 
 
-7. Ich habe mir das System durch „Tuning-Tools“ oder Schadsoftware zerschossen - bekommt der Optimizer das wieder hin? 
-Antwort: 
+7. Ich habe mir das System durch „Tuning-Tools“ oder Schadsoftware zerschossen - bekommt der Optimizer das wieder hin?  
+Antwort:  
 in den meisten Fällen JA - Bei Schadsoftware sieht es da leider anders aus. Genau hierfür gibt es eine Spezielle „RESCUE-VERSION“ des WINDOWS-OPTIMIZER, die zusätzlich alle Systemdateien prüft und fehlerhafte oder fehlende Dateien durch originale von Microsoft ersetzt und alle Windows-Firewall-Einstellungen wieder auf Windows-Standart zurücksetzt. Im Anschluss wird noch eine vollständige Offline-Virenprüfung gestartet. 
 
-Hier geht es zur RESCUE-EDITION: 
+Hier geht es zur RESCUE-EDITION:  
 EDIT: Bereits in das offizielle Windows-Otimizer-Script als "optionales Feature" integriert. 
 
-8. Stimmt es, daß die Entwickler des WINDOWS-OPTIMIZER in Kontakt mit Microsoft stehen und so z.B. auf aktuelle Probleme wie den aktuellen RDP-Bug reagieren können UND dazu sogar kurzfristig gegebenenfalls ein Fix kommt?
-Antwort:
+8. Stimmt es, daß die Entwickler des WINDOWS-OPTIMIZER in Kontakt mit Microsoft stehen und so z.B. auf aktuelle Probleme wie den aktuellen RDP-Bug reagieren können UND dazu sogar kurzfristig gegebenenfalls ein Fix kommt?  
+Antwort:  
 Das ist korrekt.
 
-9. Seit wann gibt es den Optimizer schon? 
-Antwort: 
+9. Seit wann gibt es den Optimizer schon?  
+Antwort:  
 Die ersten offiziellen Versionen (v1.0 + v1.1) wurden erstmals im Sommer 2006 durch mich unter dem Namen XP-OPTIMIZER.vbs veröffentlicht.
 
-10. Steckt hinter dem WINDOWS-OPTIMIZER eine Firma?
-Antwort: 
+10. Steckt hinter dem WINDOWS-OPTIMIZER eine Firma?  
+Antwort:  
 Nein - Keine Firma, keine Werbung, keine Ads oder sonst dergleichen. 
 Hier geht es um ein reines Hobby- und Community-Projekt, die Software ist komplett kostenlos und ja, wir „verplempern“ tatsächlich einen Teil unserer Freizeit dafür :)
 
-11. Unterstützt der WINDOWS-OPTIMIZER auch andere Sprachen als deutsch?
-Antwort: 
+11. Unterstützt der WINDOWS-OPTIMIZER auch andere Sprachen als deutsch?  
+Antwort:  
 Der WINDOWS-OPTIMIZER unterstützt bisher neben deutsch noch eine englische Übersetzung, falls die Windows-Oberflächensprache nicht auf deutsch eingestellt ist.
 
-12. Warum gibt es keine GUI-Benutzeroberfläche zum Häkchen setzen, Werte Eintragen oder Schieber bewegen?
-Antwort: 
+12. Warum gibt es keine GUI-Benutzeroberfläche zum Häkchen setzen, Werte Eintragen oder Schieber bewegen?  
+Antwort:  
 Weil das Tool einfach anders funktioniert als diese „Tuning“-Tools. Die Einstellungen, die durch diese Tools ohne Hardware-Abfrage gesetzt werden, werden durch den WINDOWS-OPTIMIZER zum größten Teil wieder auf Windows-Standart bzw. auf die von Microsoft empfohlene Werte zurückgesetzt.
 
-13. Beim 1. Start nach dem Patch mit dem WINDOWS-OPTIMIZER startet das Windows sehr langsam und arbeitet minutenlang irgend etwas im Hintergrund ab - Ist das normal?
-Antwort: 
+13. Beim 1. Start nach dem Patch mit dem WINDOWS-OPTIMIZER startet das Windows sehr langsam und arbeitet minutenlang irgend etwas im Hintergrund ab - Ist das normal?  
+Antwort:  
 Ja - Durch den WINDOWS-OPTIMIZER werden verschiedene sog. Windows-Caches an die verbaute Hardware angepasst und somit teilweise drastisch vergrößert. Diese Speicherbereiche müssen nun nach dem ersten Neustart erstmal mit Informationen „befüllt“ werden. Das Prefetching, die Windows-Suche, der Icon-Cache und der Datei-Index werden neu erstellt und alle noch offenen „geplanten Tasks“ wie Update-Anfragen, offene automatische Virenprüfungen, Prefetching, Festplatten-Hintergrundoptimierung und Co werden angestoßen und eine optimal an das System angepasste Auslagerungsdatei wird erstellt, was je nach System ein paar Minuten dauern kann. Windows wird im Verlauf der ersten Sitzungen nun immer schneller. Dies ist normal und findet nach einer Neuinstallation von Windows ebenso statt. Der Neustart nach der Optimierung sollte zeitnah durchgeführt werden.
 
-14. Optionale Festplattenoptimierung - Was ist das? 
-Antwort: 
+14. Optionale Festplattenoptimierung - Was ist das?  
+Antwort:  
 Hier wird mit Boardmitteln gearbeitet, also kein Reg-Cleaner oder ähnlich. Im ersten Schritt werden alle Partitionen durch die windowseigene Cleanmanager.exe bereinigt und anschließend defragmentiert. Bei SSDs wird durch die Defrag.exe ausschließlich das Trimming angestoßen, welches die Lebensdauer einer SSD signifikant verlängern kann, da hier ungenutzter Speicherplatz nach dem Löschen von Daten wieder freigegeben wird. Eine richtige Defragmentierung von SSDs ist nicht möglich und wird von Windows grundsätzlich verweigert. 
 
-15. Wann und wie oft sollte man den WINDOWS-OPTIMIZER über das System laufen lassen? 
-Antwort: 
+15. Wann und wie oft sollte man den WINDOWS-OPTIMIZER über das System laufen lassen?  
+Antwort:  
 Im Prinzip jedes Mal, wenn die Hardware des PCs wie zb Mainboard, Arbeitsspeicher, Grafikkarte, CPU oder Netzwerkkarte usw. verändert oder Treiber geupdatet wurden, um das Betriebssystem optimal an die neue Konstellation Hardware + Treiber anzupassen. Ansonsten immer nach einem großen Windows-Update oder nach Bedarf um alle Festplatten zu bereinigen.
 
-16. Was genau ist der SPEED-TEST und wie funktioniert das Programm?
-Antwort:
+16. Was genau ist der SPEED-TEST und wie funktioniert das Programm?  
+Antwort:  
 Der SPEED-TEST ist ein weiteres Script aus unserem Projekt, daß die Windowseigene Systembewertung „WinSAT“ anstößt und im Anschluss eine Gesamtbewertung der Systemperformance und der Performance verschiedener Einzelkomponenten ausgibt um mögliche „Flaschenhälse“ aufzuzeigen. Zusätzlich wird bei dem Test noch die Zeit der Systembewertung mitgeschnitten und im Ergebnis mit angegeben. Dieser Test benötigt je nach System etwa 2-3 Minuten.
 
-17. Kann man auch alle Programme aus dem Projekt zusammen herunterladen?
-Antwort: 
+17. Kann man auch alle Programme aus dem Projekt zusammen herunterladen?  
+Antwort:  
 Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR):  
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 
-18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen? 
-Antwort: 
+18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen?  
+Antwort:  
 Zum Entpacken von komprimierter Software oder Archiven empfehlen wir zum Beispiel die kostenlose Software 7-ZIP: https://7-zip.org/ 
 
-19. Windows-Script-Host deaktiviert?
-Antwort: Die beiden Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TEST.vbs" und das Script "DARK LIGHT.vbs" wurden in der Windowseigenen Programmiersprache Visual-Basic-Script programmiert. Visual-Basic-Script ist in Windows bereits standartmäßig integriert und auch aktiviert, kann aber über die Einstellungen oder verschiedene Tools deaktiviert/aktiviert werden. Falls Windows-Script-Host in Windows deaktiviert wurde, können diese Scripte aus unserem Projekt nicht funktionieren und es kommt zu der Fehlermeldung "Windows-Script-Host deaktiviert!". In diesem Fall die beiliegende Registrierungsdatei >>"Windows Script Host aktivieren.reg"<< ausführen, um Windows-Script-Host wieder zu aktivieren (Windowsstandart).
+19. Windows-Script-Host deaktiviert?  
+Antwort:
+Die beiden Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TEST.vbs" und das Script "DARK LIGHT.vbs" wurden in der Windowseigenen Programmiersprache Visual-Basic-Script programmiert. Visual-Basic-Script ist in Windows bereits standartmäßig integriert und auch aktiviert, kann aber über die Einstellungen oder verschiedene Tools deaktiviert/aktiviert werden. Falls Windows-Script-Host in Windows deaktiviert wurde, können diese Scripte aus unserem Projekt nicht funktionieren und es kommt zu der Fehlermeldung "Windows-Script-Host deaktiviert!". In diesem Fall die beiliegende Registrierungsdatei >>"Windows Script Host aktivieren.reg"<< ausführen, um Windows-Script-Host wieder zu aktivieren (Windowsstandart).
 
-20. Kann ich helfen und darf ich noch weitere Leute in die Gruppe einladen oder Beiträge, die hier durch die Administratoren gepostet wurden weiterteilen?
-Antwort: 
+21. Kann ich helfen und darf ich noch weitere Leute in die Gruppe einladen oder Beiträge, die hier durch die Administratoren gepostet wurden weiterteilen?  
+Antwort:  
 Natürlich - Mach richtig Action - Werde Teil der Community und lade Gott und die Welt ein, Teile unsere Beiträge, erzähl deinen Eindruck weiter und hilf mit, daß diese Projekt-Gruppe im ganzen Netz bekannt wird. Wir suchen auch ständig nach neuen Ideen oder Beta-Testern für neue Vorabversionen des WINDOWS-OPTIMIZER :)
 
 Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt in der Projektgruppe an - Viel Spaß mit dem aktuellen Update :)

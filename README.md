@@ -93,9 +93,7 @@ Der SPEED-TEST ist ein weiteres Script aus unserem Projekt, daß die Windowseige
 
 17. Kann man auch alle Programme aus dem Projekt zusammen herunterladen?
 Antwort: 
-Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR): 
-https://www.dropbox.com/s/3z8lw5s4092uidh/WIN-OPTIMIZER.rar?dl=1 
-oder
+Hier der Downloadlink mit allen zusätzlichen Inhalten (RAR):  
 https://github.com/WINDOWS-OPTIMIZER-PROJECT/WINDOWS-OPTIMIZER/blob/main/WIN-OPTIMIZER.rar 
 
 18. Ich habe mir das RAR-Archiv jetzt heruntergeladen - wie kann ich das öffnen? 

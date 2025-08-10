@@ -102,7 +102,7 @@ Zum Entpacken von komprimierter Software oder Archiven empfehlen wir zum Beispie
 
 19. Windows-Script-Host deaktiviert?  
 Antwort:  
-Die beiden Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TEST.vbs" und das Script "DARK LIGHT.vbs" wurden in der Windowseigenen Programmiersprache Visual-Basic-Script programmiert. Visual-Basic-Script ist in Windows bereits standartmäßig integriert und auch aktiviert, kann aber über die Einstellungen oder verschiedene Tools deaktiviert/aktiviert werden. Falls Windows-Script-Host in Windows deaktiviert wurde, können diese Scripte aus unserem Projekt nicht funktionieren und es kommt zu der Fehlermeldung "Windows-Script-Host deaktiviert!". In diesem Fall die beiliegende Registrierungsdatei >>"Windows Script Host aktivieren.reg"<< ausführen, um Windows-Script-Host wieder zu aktivieren (Windowsstandart).
+Die Tools "WIN-OPTIMIZER.vbs" und "AUTOSTART-OPTIMIZER.vbs" sowie der "SPEED-TEST.vbs" und das Script "DARK LIGHT.vbs" wurden in der Windowseigenen Programmiersprache Visual-Basic-Script programmiert. Visual-Basic-Script ist in Windows bereits standartmäßig integriert und auch aktiviert, kann aber über die Einstellungen oder verschiedene Tools deaktiviert/aktiviert werden. Falls Windows-Script-Host in Windows deaktiviert wurde, können diese Scripte aus unserem Projekt nicht funktionieren und es kommt zu der Fehlermeldung "Windows-Script-Host deaktiviert!". In diesem Fall die beiliegende Registrierungsdatei >>"Windows Script Host aktivieren.reg"<< ausführen, um Windows-Script-Host wieder zu aktivieren (Windowsstandart).
 
 21. Kann ich helfen und darf ich noch weitere Leute in die Gruppe einladen oder Beiträge, die hier durch die Administratoren gepostet wurden weiterteilen?  
 Antwort:  
@@ -110,7 +110,7 @@ Natürlich - Mach richtig Action - Werde Teil der Community und lade Gott und di
 
 Weitere Fragen oder Vorschläge für ein kommendes Update? Schreibt uns direkt in der Projektgruppe an - Viel Spaß mit dem aktuellen Update :)
 
-New Updates coming soon..
+New Updates coming soon..  
   
   
 ***** Was ist neu? ***** 

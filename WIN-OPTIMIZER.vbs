@@ -1377,6 +1377,7 @@ WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics\Shell I
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics\Shell Icon Size", 32, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Control Panel\Mouse\MouseHoverTime", 0, "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\System.IsPinnedToNamespaceTree", 1, "REG_DWORD" 
+WSHShell.RegWrite "HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\FolderType", "NotSpecified", "REG_SZ" 
 WSHShell.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FavIntelliMenus", "No", "REG_SZ" 
 Err.Clear 
 On Error Resume Next 
